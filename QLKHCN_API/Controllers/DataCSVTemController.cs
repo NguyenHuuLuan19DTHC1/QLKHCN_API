@@ -42,6 +42,7 @@ namespace QLKHCN_API.Controllers
             if (result == null)
             {
                 return NotFound();
+
             }
 
             return result;
