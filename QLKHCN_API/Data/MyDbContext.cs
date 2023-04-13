@@ -8,8 +8,12 @@ namespace QLKHCN_API.Data
         {
 
         }
-        public DbSet<DataCSV> DataCSVs { get; set; }
-        public DbSet<User> Users { get; set; }
-        public DbSet<DataCSVTem> DataCSVTems { get; set;}
+        public DbSet<DanhMuc> DanhMuc { get; set; }
+        public DbSet<DanhMucXetDuyet> DanhMucXetDuyet { get; set; }
+        public DbSet<QuyDoiGV> QuyDoiGV { get; set; }
+        public DbSet<QuyDoiNCV> QuyDoiNCV { get; set; }
+        public DbSet<ThanhToanGV> ThanhToanGV { get; set; }
+        public DbSet<ThanhToanNCV> ThanhToanNCV { get; set; }
+        public DbSet<NguoiDung> NguoiDung { get; set; }
     }
 }
