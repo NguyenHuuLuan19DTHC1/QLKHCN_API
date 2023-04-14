@@ -1,31 +1,31 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using QLKHCN_API.Data;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System;
 using System.Linq;
-using Microsoft.EntityFrameworkCore;
 
 namespace QLKHCN_API.Controllers
 {
-    [Route("api/[controller]/")]
+    [Route("api/[controller]")]
     [ApiController]
-    public class ThanhToanGVController : ControllerBase
+    public class GiangVienController : ControllerBase
     {
         private readonly MyDbContext _context;
-        public ThanhToanGVController(MyDbContext context)
+        public GiangVienController(MyDbContext context)
         {
             _context = context;
         }
         [HttpGet]
-        [Route("Get-LSP")]
+        [Route("Get-HoTen")]
 
-        public async Task<ActionResult<IEnumerable<ThanhToanGV>>> Get_LSP(string lsp)
+        public async Task<ActionResult<IEnumerable<GiangVien>>> Get_HoTen(string hoten)
         {
             try
             {
-                var result = await _context.ThanhToanGV.Where(a => a.LoaiSanPham == lsp).ToListAsync();
+                var result = await _context.GiangViens.Where(a =>a.HoTen == hoten).ToListAsync();
                 if (result.Count > 0)
                 {
                     return result;
@@ -39,13 +39,13 @@ namespace QLKHCN_API.Controllers
             }
         }
         [HttpGet]
-        [Route("Get-ID")]
+        [Route("Get-MaGV")]
 
-        public async Task<ActionResult<IEnumerable<ThanhToanGV>>> Get_ID(int id)
+        public async Task<ActionResult<IEnumerable<GiangVien>>> Get_MaGV(string MaGV)
         {
             try
             {
-                var result = await _context.ThanhToanGV.Where(a => a.ID == id).ToListAsync();
+                var result = await _context.GiangViens.Where(a => a.MaGV == MaGV).ToListAsync();
                 if (result.Count > 0)
                 {
                     return result;
@@ -61,11 +61,11 @@ namespace QLKHCN_API.Controllers
         [HttpGet]
         [Route("Get-all")]
 
-        public async Task<ActionResult<IEnumerable<ThanhToanGV>>> Get_all()
+        public async Task<ActionResult<IEnumerable<GiangVien>>> Get_all()
         {
             try
             {
-                var result = await _context.ThanhToanGV.ToListAsync();
+                var result = await _context.GiangViens.ToListAsync();
                 if (result.Count > 0)
                 {
                     return result;
@@ -79,16 +79,16 @@ namespace QLKHCN_API.Controllers
             }
         }
         [HttpPut]
-        [Route("Update/{id}")]
+        [Route("Update/{MaGV}")]
 
-        public async Task<IActionResult> Check(int id, ThanhToanGV thanhtoanGV)
+        public async Task<IActionResult> Check(string MaGV, GiangVien giangVien)
         {
-            if (id != thanhtoanGV.ID)
+            if (MaGV != giangVien.MaGV)
             {
                 return BadRequest();
             }
 
-            _context.Entry(thanhtoanGV).State = EntityState.Modified;
+            _context.Entry(giangVien).State = EntityState.Modified;
 
             try
             {
@@ -102,16 +102,16 @@ namespace QLKHCN_API.Controllers
             return NoContent();
         }
         [HttpDelete]
-        [Route("Delete/{id}")]
+        [Route("Delete/{MaGV}")]
 
-        public async Task<ActionResult<IEnumerable<ThanhToanGV>>> Delete(int id)
+        public async Task<ActionResult<IEnumerable<GiangVien>>> Delete(string MaGV)
         {
             try
             {
-                var result = await _context.ThanhToanGV.FindAsync(id);
-                if (result!=null)
+                var result = await _context.GiangViens.FindAsync(MaGV);
+                if (result != null)
                 {
-                    _context.ThanhToanGV.Remove(result);
+                    _context.GiangViens.Remove(result);
                     await _context.SaveChangesAsync();
                     return NoContent();
                 }
@@ -123,6 +123,5 @@ namespace QLKHCN_API.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
     }
 }
