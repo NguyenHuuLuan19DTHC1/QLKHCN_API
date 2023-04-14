@@ -1,0 +1,71 @@
+﻿
+@{
+    ViewBag.Title = "Edit Giảng Viên";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update Giảng Viên</title>
+</head>
+<body>
+    <h1>Update Giảng Viên</h1>
+    <form id="update-form">
+        <label for="HoTen">Họ tên: </label>
+        <input type="text" id="HoTen" name="HoTen"><br><br>
+        <label for="MaDV">Mã DV: </label>
+        <input type="text" id="MaDV" name="MaDV"><br><br>
+       
+        <button type="submit" id="update-btn">Update</button>
+    </form>
+    <script>
+        // Lấy ID từ URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const magv = urlParams.get('MaGV');
+
+        // Tạo yêu cầu GET để lấy dữ liệu hiện tại
+        fetch("https://localhost:44364/api/GiangVien/Get-MaGV?MaGV=" + magv)
+            .then(response => response.json())
+            .then(data => {
+
+                // Điền dữ liệu vào form
+                data.forEach(function (item) {
+                    document.getElementById('HoTen').value = item.hoTen;
+                    document.getElementById('MaDV').value = item.maDV;
+                });
+
+            });
+
+        // Tạo yêu cầu PUT khi người dùng bấm vào nút "Update"
+        document.getElementById('update-form').addEventListener('submit', event => {
+            event.preventDefault();
+            const data = {
+                maGV:magv,
+                hoTen: document.getElementById('HoTen').value,
+                maDV: document.getElementById('MaDV').value,
+            };
+            console.log(data);
+            fetch("https://localhost:44364/api/GiangVien/Update/" + magv, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+                .then(response => {
+                    if (response.ok) {
+                        alert('Data updated successfully!');
+                        // Chuyển trang về danh sách dữ liệu
+                        window.location.href = '/GiangVien';
+                    } else {
+                        alert('Error updating data.');
+                    }
+                });
+        });
+    </script>
+</body>
+</html>
+
+

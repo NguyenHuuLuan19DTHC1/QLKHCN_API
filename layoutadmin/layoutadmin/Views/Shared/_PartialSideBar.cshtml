@@ -1,0 +1,67 @@
+﻿<!-- Sidebar -->
+<div class="sidebar">
+    <!-- Sidebar user (optional) -->
+    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+            <img src=" ~/Content/clients/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+            <a href="#" class="d-block">Alexander Pierce</a>
+        </div>
+    </div>
+
+    <!-- SidebarSearch Form -->
+    <!-- Sidebar Menu -->
+    <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <!-- Add icons to the links using the .nav-icon class
+    with font-awesome or any other icon font library -->
+            <li class="nav-item">
+                <a href="@Url.Action("Index","Home")" class="nav-link">
+                    <i class="nav-icon fas fa-tachometer-alt"></i>
+                    <p>
+                        Danh mục thanh toán GV
+                    </p>
+                </a>
+
+            </li>
+            <li class="nav-item">
+                <a href="@Url.Action("Index","NCV")" class="nav-link">
+                    <i class="nav-icon fas fa-tachometer-alt"></i>
+                    <p>
+                        Danh mục thanh toán NCV
+                    </p>
+                </a>
+
+            </li>
+            <li class="nav-item">
+                <a href="@Url.Action("Index","GiangVien")" class="nav-link">
+                    <i class="nav-icon fas fa-tachometer-alt"></i>
+                    <p>
+                        Giảng Viên
+                    </p>
+                </a>
+
+            </li>
+            
+            <li class="nav-item">
+                <a href="" class="nav-link">
+                    <i class="nav-icon fas fa-th"></i>
+                    <p>
+                        Đăng xuất
+                        @*<span class="right badge badge-danger">New</span>*@
+                    </p>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <!-- /.sidebar-menu -->
+</div>
+<!-- /.sidebar -->
+@if (Request.IsAuthenticated)
+{
+    <div style="display:none">
+        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { @id = "logOffForm" }))
+        {
+            @Html.AntiForgeryToken()}
+    </div>}
