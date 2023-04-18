@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using QLKHCN_API.Data;
 using System;
@@ -14,13 +13,14 @@ namespace QLKHCN_API.Controllers
     public class DanhMucController : ControllerBase
     {
         private readonly MyDbContext _context;
+
         public DanhMucController(MyDbContext context)
         {
             _context = context;
         }
+
         [HttpGet]
         [Route("Get-issn")]
-
         public async Task<ActionResult<IEnumerable<DanhMuc>>> Get_issn(string issn)
         {
             try
@@ -32,15 +32,14 @@ namespace QLKHCN_API.Controllers
                 }
                 return NotFound();
             }
-
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
         }
+
         [HttpGet]
         [Route("Get-eissn")]
-
         public async Task<ActionResult<IEnumerable<DanhMuc>>> Get_eissn(string eissn)
         {
             try
@@ -52,7 +51,6 @@ namespace QLKHCN_API.Controllers
                 }
                 return NotFound();
             }
-
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);

@@ -151,6 +151,25 @@ namespace QLKHCN_API.Migrations
                     b.ToTable("DanhMucXetDuyet");
                 });
 
+            modelBuilder.Entity("QLKHCN_API.Data.GiangVien", b =>
+                {
+                    b.Property<string>("MaGV")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("HoTen")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("MaDV")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("MaGV");
+
+                    b.ToTable("GiangVien");
+                });
+
             modelBuilder.Entity("QLKHCN_API.Data.NguoiDung", b =>
                 {
                     b.Property<int>("IDUser")

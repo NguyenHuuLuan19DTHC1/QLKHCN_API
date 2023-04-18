@@ -6,8 +6,8 @@ namespace QLKHCN_API.Data
     {
         public MyDbContext(DbContextOptions options) : base(options)
         {
-
         }
+
         public DbSet<DanhMuc> DanhMuc { get; set; }
         public DbSet<DanhMucXetDuyet> DanhMucXetDuyet { get; set; }
         public DbSet<QuyDoiGV> QuyDoiGV { get; set; }
@@ -15,7 +15,6 @@ namespace QLKHCN_API.Data
         public DbSet<ThanhToanGV> ThanhToanGV { get; set; }
         public DbSet<ThanhToanNCV> ThanhToanNCV { get; set; }
         public DbSet<NguoiDung> NguoiDung { get; set; }
-        public DbSet<GiangVien> GiangViens { get; set; }
-
+        public DbSet<GiangVien> GiangVien { get; set; }
     }
 }

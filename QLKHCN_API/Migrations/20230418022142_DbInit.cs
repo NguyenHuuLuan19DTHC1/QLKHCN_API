@@ -1,5 +1,5 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
+using System;
 
 namespace QLKHCN_API.Migrations
 {
@@ -56,6 +56,19 @@ namespace QLKHCN_API.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_DanhMucXetDuyet", x => x.IDDanhMuc);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "GiangVien",
+                columns: table => new
+                {
+                    MaGV = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    HoTen = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    MaDV = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_GiangVien", x => x.MaGV);
                 });
 
             migrationBuilder.CreateTable(
@@ -158,6 +171,9 @@ namespace QLKHCN_API.Migrations
 
             migrationBuilder.DropTable(
                 name: "DanhMucXetDuyet");
+
+            migrationBuilder.DropTable(
+                name: "GiangVien");
 
             migrationBuilder.DropTable(
                 name: "NguoiDung");

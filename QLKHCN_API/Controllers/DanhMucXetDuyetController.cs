@@ -1,11 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using QLKHCN_API.Data;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using QLKHCN_API.Data;
+using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace QLKHCN_API.Controllers
 {
@@ -14,14 +13,14 @@ namespace QLKHCN_API.Controllers
     public class DanhMucXetDuyetController : ControllerBase
     {
         private readonly MyDbContext _context;
+
         public DanhMucXetDuyetController(MyDbContext context)
         {
             _context = context;
-
         }
+
         [HttpGet]
         [Route("Get-all-datatem")]
-
         public async Task<ActionResult<IEnumerable<DanhMucXetDuyet>>> GetAllDataTem()
         {
             try
@@ -33,9 +32,9 @@ namespace QLKHCN_API.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
         [HttpGet]
         [Route("Get-by-userid")]
-
         public async Task<ActionResult<IEnumerable<DanhMucXetDuyet>>> GetByUserId(string userid)
         {
             var result = await _context.DanhMucXetDuyet.Where(a => a.userId == userid).ToListAsync();
@@ -48,9 +47,9 @@ namespace QLKHCN_API.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
         [HttpGet]
         [Route("Get-by-groupuser")]
-
         public async Task<ActionResult<IEnumerable<DanhMucXetDuyet>>> GetByGroupUser(string groupuser)
         {
             var result = await _context.DanhMucXetDuyet.Where(a => a.userId.Contains(groupuser)).ToListAsync();
@@ -63,9 +62,9 @@ namespace QLKHCN_API.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
         [HttpGet]
         [Route("Get-by-tenbaibao")]
-
         public async Task<ActionResult<IEnumerable<DanhMucXetDuyet>>> GetByTenBaiBao(string tenbaibao)
         {
             var result = await _context.DanhMucXetDuyet.Where(a => a.tenBaiBao.Contains(tenbaibao)).ToListAsync();

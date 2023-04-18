@@ -1,11 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using QLKHCN_API.Data;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System;
-using System.Linq;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using QLKHCN_API.Data;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace QLKHCN_API.Controllers
 {
@@ -14,13 +13,14 @@ namespace QLKHCN_API.Controllers
     public class ThanhToanNCVController : ControllerBase
     {
         private readonly MyDbContext _context;
+
         public ThanhToanNCVController(MyDbContext context)
         {
             _context = context;
         }
+
         [HttpGet]
         [Route("Get-spkhcn")]
-
         public async Task<ActionResult<IEnumerable<ThanhToanNCV>>> Get_By_SPKHCN(string spkhcn)
         {
             try
@@ -32,15 +32,14 @@ namespace QLKHCN_API.Controllers
                 }
                 return NotFound();
             }
-
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
         }
+
         [HttpGet]
         [Route("Get-ID")]
-
         public async Task<ActionResult<IEnumerable<ThanhToanNCV>>> Get_ID(int id)
         {
             try
@@ -52,15 +51,14 @@ namespace QLKHCN_API.Controllers
                 }
                 return NotFound();
             }
-
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
         }
+
         [HttpGet]
         [Route("Get-all")]
-
         public async Task<ActionResult<IEnumerable<ThanhToanNCV>>> Get_all()
         {
             try
@@ -72,15 +70,14 @@ namespace QLKHCN_API.Controllers
                 }
                 return NotFound();
             }
-
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
         }
+
         [HttpPut]
         [Route("Update/{id}")]
-
         public async Task<IActionResult> Check(int id, ThanhToanNCV thanhtoanNCV)
         {
             if (id != thanhtoanNCV.ID)
@@ -101,9 +98,9 @@ namespace QLKHCN_API.Controllers
 
             return NoContent();
         }
+
         [HttpDelete]
         [Route("Delete/{id}")]
-
         public async Task<ActionResult<IEnumerable<ThanhToanNCV>>> Delete(int id)
         {
             try
@@ -117,12 +114,10 @@ namespace QLKHCN_API.Controllers
                 }
                 return NotFound();
             }
-
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
         }
-
     }
 }
