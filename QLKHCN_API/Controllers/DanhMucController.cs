@@ -20,7 +20,6 @@ namespace QLKHCN_API.Controllers
         }
         [HttpGet]
         [Route("Get-issn")]
-
         public async Task<ActionResult<IEnumerable<DanhMuc>>> Get_issn(string issn)
         {
             try
@@ -32,7 +31,6 @@ namespace QLKHCN_API.Controllers
                 }
                 return NotFound();
             }
-
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
@@ -40,7 +38,6 @@ namespace QLKHCN_API.Controllers
         }
         [HttpGet]
         [Route("Get-eissn")]
-
         public async Task<ActionResult<IEnumerable<DanhMuc>>> Get_eissn(string eissn)
         {
             try
@@ -52,7 +49,6 @@ namespace QLKHCN_API.Controllers
                 }
                 return NotFound();
             }
-
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);

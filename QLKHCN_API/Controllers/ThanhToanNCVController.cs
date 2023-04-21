@@ -20,7 +20,6 @@ namespace QLKHCN_API.Controllers
         }
         [HttpGet]
         [Route("Get-spkhcn")]
-
         public async Task<ActionResult<IEnumerable<ThanhToanNCV>>> Get_By_SPKHCN(string spkhcn)
         {
             try
@@ -32,7 +31,6 @@ namespace QLKHCN_API.Controllers
                 }
                 return NotFound();
             }
-
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);

@@ -32,12 +32,10 @@ namespace QLKHCN_API.Controllers
         public async Task<ActionResult<NguoiDung>> GetNguoiDung(string id)
         {
             var nguoiDung = await _context.NguoiDung.FindAsync(id);
-
             if (nguoiDung == null)
             {
                 return NotFound();
             }
-
             return nguoiDung;
         }
 
@@ -50,7 +48,6 @@ namespace QLKHCN_API.Controllers
             {
                 return BadRequest();
             }
-
             _context.Entry(nguoiDung).State = EntityState.Modified;
 
             try
@@ -68,7 +65,6 @@ namespace QLKHCN_API.Controllers
                     throw;
                 }
             }
-
             return NoContent();
         }
 
@@ -93,7 +89,6 @@ namespace QLKHCN_API.Controllers
                     throw;
                 }
             }
-
             return CreatedAtAction("GetNguoiDung", new { id = nguoiDung.IDUser }, nguoiDung);
         }
 
@@ -106,10 +101,8 @@ namespace QLKHCN_API.Controllers
             {
                 return NotFound();
             }
-
             _context.NguoiDung.Remove(nguoiDung);
             await _context.SaveChangesAsync();
-
             return NoContent();
         }
 
@@ -128,12 +121,8 @@ namespace QLKHCN_API.Controllers
                     nd => nd.IDUser,
                     (dm, nd) => new NguoiDung { IDUser = dm.userId, HoTen = nd.HoTen }
                 )
-
                 .ToListAsync();
-
             return Ok(result);
         }
-
-
     }
 }

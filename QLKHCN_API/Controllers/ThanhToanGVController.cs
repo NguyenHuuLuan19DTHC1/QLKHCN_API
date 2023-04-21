@@ -20,7 +20,6 @@ namespace QLKHCN_API.Controllers
         }
         [HttpGet]
         [Route("Get-LSP")]
-
         public async Task<ActionResult<IEnumerable<ThanhToanGV>>> Get_LSP(string lsp)
         {
             try
@@ -32,7 +31,6 @@ namespace QLKHCN_API.Controllers
                 }
                 return NotFound();
             }
-
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
@@ -40,7 +38,6 @@ namespace QLKHCN_API.Controllers
         }
         [HttpGet]
         [Route("Get-ID")]
-
         public async Task<ActionResult<IEnumerable<ThanhToanGV>>> Get_ID(int id)
         {
             try
@@ -52,7 +49,6 @@ namespace QLKHCN_API.Controllers
                 }
                 return NotFound();
             }
-
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);

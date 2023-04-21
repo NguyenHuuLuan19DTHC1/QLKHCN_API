@@ -9,7 +9,6 @@
 </head>
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
-
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <div class="container-fluid">
@@ -52,7 +51,6 @@
                                             <th>Tên Bài Báo</th>
                                             <th>groupUser</th>
                                             <th>Rank</th>
-
                                             <th>link</th>
                                             <th>Trạng Thái</th>
                                             <th>Cập nhật</th>
@@ -74,7 +72,6 @@
                                             <th>Tên Bài Báo</th>
                                             <th>groupUser</th>
                                             <th>Rank</th>
-
                                             <th>link</th>
                                             <th>Trạng Thái</th>
                                             <th>Cập nhật</th>
@@ -141,7 +138,6 @@
                     <td>${user.link}</td>
                     <td>
                         <select id="status-${user.idDanhMuc}">
-
                             <option value="0" ${user.status == 0 ? "selected" : ""}>Đang đợi duyệt</option>
                             <option value="1" ${user.status == 1 ? "selected" : ""}>Duyệt lần 1</option>
                             <option value="2" ${user.status == 2 ? "selected" : ""}>Duyệt lần 2</option>
@@ -151,12 +147,7 @@
                     </td>
                     <td>
                     <button onclick="changeStatus(document.querySelector('#status-${user.idDanhMuc}').value, ${user.idDanhMuc})">Cập nhật</button>
-
-
-
                     </td>
-
-
                 </tr>`;
             });
             tbody.innerHTML = htmls.join('');

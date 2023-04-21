@@ -6,6 +6,15 @@ using System.Threading.Tasks;
 using System;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using System.IO;
+using System.Net.Http;
+using System.Net;
+using ExcelDataReader;
+using System.ComponentModel.DataAnnotations;
+using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using System.Data;
+using System.Text;
 
 namespace QLKHCN_API.Controllers
 {
@@ -17,7 +26,6 @@ namespace QLKHCN_API.Controllers
         public DanhMucXetDuyetController(MyDbContext context)
         {
             _context = context;
-
         }
         [HttpGet]
         [Route("Get-all-datatem")]
@@ -113,9 +121,7 @@ namespace QLKHCN_API.Controllers
                     nd => nd.IDUser,
                     (dm, nd) => new NguoiDung { IDUser = dm.userId, HoTen = nd.HoTen }
                 )
-
                 .ToListAsync();
-
             return Ok(result);
         }
         [HttpPut("{idDanhMuc}")]
@@ -128,12 +134,9 @@ namespace QLKHCN_API.Controllers
                 {
                     return NotFound();  
                 }
-
                 danhmucxetduyet.Status = status;
-
                 _context.Entry(danhmucxetduyet).State = EntityState.Modified;
                 await _context.SaveChangesAsync();
-
                 return Ok(danhmucxetduyet);
             }
             catch (Exception ex)
@@ -142,6 +145,68 @@ namespace QLKHCN_API.Controllers
             }
         }
 
+     
 
+
+        [HttpPost("/api/UploadExcelFile"), DisableRequestSizeLimit]
+        public async Task<IActionResult> UploadExcel(IFormFile formFile)
+
+        {
+            try
+            {
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+            var list = new List<DanhMucXetDuyet>();
+            using (var stream = new MemoryStream())
+            {
+                await formFile.CopyToAsync(stream);
+                var reader = ExcelReaderFactory.CreateReader(stream);
+                var result = reader.AsDataSet(new ExcelDataSetConfiguration
+                {
+                    ConfigureDataTable = _ => new ExcelDataTableConfiguration
+                    {
+                        UseHeaderRow = true
+                    }
+                });
+                var table = result.Tables[0];
+                for (int i = 1; i < table.Rows.Count; i++)
+                {
+                    var row = table.Rows[i];
+                    if (row.ItemArray.All(x => string.IsNullOrEmpty(x?.ToString().Trim())))
+                    {
+                        continue;
+                    }
+                    var item = new DanhMucXetDuyet
+                    {
+                        journal_name = row[0] == DBNull.Value ? null : row[0].ToString(),
+                        issn = row[1] == DBNull.Value ? null : row[1].ToString(),
+                        eissn = row[2] == DBNull.Value ? null : row[2].ToString(),
+                        category = row[3] == DBNull.Value ? null : row[3].ToString(),
+                        citations = row[4] == DBNull.Value ? null : row[4].ToString(),
+                        if_2022 = row[5] == DBNull.Value ? null : row[5].ToString(),
+                        jci = row[6] == DBNull.Value ? null : row[6].ToString(),
+                        percentageOAGold = row[7] == DBNull.Value ? null : row[7].ToString(),
+                        userId = row[8] == DBNull.Value ? null : row[8].ToString(),
+                        rank = row[9] == DBNull.Value ? null : row[9].ToString(),
+                        image = row[10] == DBNull.Value ? null : row[10].ToString(),
+                        link = row[11] == DBNull.Value ? null : row[11].ToString(),
+                        tenBaiBao = row[12] == DBNull.Value ? null : row[12].ToString(),
+                        groupUser = row[13] == DBNull.Value ? null : row[13].ToString(),
+                        Status = int.Parse(row[14].ToString())
+                    };
+                    list.Add(item);
+                }
+            }
+            foreach (var item in list)
+            {
+                _context.DanhMucXetDuyet.Add(item);
+            }
+            _context.SaveChanges();
+            return Ok();
+        }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }
