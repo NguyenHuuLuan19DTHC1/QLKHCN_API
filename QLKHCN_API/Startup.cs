@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using OfficeOpenXml;
 using QLKHCN_API.Data;
 
 namespace QLKHCN_API
@@ -35,6 +36,7 @@ namespace QLKHCN_API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "QLKHCN_API", Version = "v1" });
             });
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
