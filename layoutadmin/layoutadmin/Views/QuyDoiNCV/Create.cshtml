@@ -1,0 +1,99 @@
+﻿@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    form {
+        width: 100%;
+        margin: 0 auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 5px #999;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="number"] {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        box-sizing: border-box;
+    }
+</style>
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">THÊM DỮ LIỆU</h3>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        <form>
+            <label for="loaiSanPham">Loại sản phẩm:</label>
+            <input type="text" id="loaiSanPham" name="loaiSanPham"><br>
+
+            <label for="moTaLoaiSanPham">Mô tả loại sản phẩm:</label>
+            <input type="text" id="moTaLoaiSanPham" name="moTaLoaiSanPham"><br>
+
+            <label for="yeuCauTieuChuan">Yêu cầu tiêu chuẩn:</label>
+            <input type="text" id="yeuCauTieuChuan" name="yeuCauTieuChuan"><br>
+
+            <label for="tietChuan">Tiết chuẩn:</label>
+            <input type="number" id="tietChuan" name="tietChuan"><br>
+
+            <label for="diem">Điểm:</label>
+            <input type="number" id="diem" name="diem"><br>
+
+            <button class="btn btn-block btn-success" onclick="CreateQuyDoiNCV()">Lưu</button>
+        </form>
+    </div>
+    <!-- /.card-body -->
+    <div id="pagination" class="pagination">
+    </div>
+</div>
+
+<script>
+
+    function CreateQuyDoiNCV() {
+
+        const apiLink = "https://localhost:44364/api/QuyDoiNCV/Create";
+        const loaiSanPham = document.getElementById("loaiSanPham").value;
+        const moTaLoaiSanPham = document.getElementById("moTaLoaiSanPham").value;
+        const yeuCauTieuChuan = document.getElementById("yeuCauTieuChuan").value;
+        const tietChuan = document.getElementById("tietChuan").value;
+        const diem = document.getElementById("diem").value;
+
+        const data = {
+            loaiSanPham: loaiSanPham,
+            moTaLoaiSanPham: moTaLoaiSanPham,
+            yeuCauTieuChuan: yeuCauTieuChuan,
+            tietChuan: tietChuan,
+            diem: diem
+        }
+
+        var options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data),
+        };
+
+        fetch(apiLink, options)
+            .then(response => {
+                if (response.ok) {
+                    alert('Thêm dữ liệu thành công!');
+                    window.location.href = '/QuyDoiGV';
+                } else {
+                    alert('Có lỗi');
+                }
+            });
+    }
+</script>

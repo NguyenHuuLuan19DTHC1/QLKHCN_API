@@ -45,9 +45,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
       <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
@@ -118,14 +115,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\GiangVienController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ImportExportController.cs" />
     <Compile Include="Controllers\NCVController.cs" />
-    <Compile Include="Controllers\XetDuyetDeTaiController.cs" />
+    <Compile Include="Controllers\QuyDoiGVController.cs" />
+    <Compile Include="Controllers\QuyDoiNCVController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -2113,7 +2115,6 @@
     <Content Include="Content\clients\plugins\summernote\summernote.js.map" />
     <Content Include="Content\clients\plugins\summernote\summernote.min.js.map" />
     <Content Include="Content\clients\plugins\toastr\toastr.js.map" />
-    <Content Include="assets\templates\templateImport.xlsx" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -2145,8 +2146,12 @@
     <Content Include="Views\NCV\Edit.cshtml" />
     <Content Include="Views\GiangVien\Index.cshtml" />
     <Content Include="Views\GiangVien\Edit.cshtml" />
-    <Content Include="Views\XetDuyetDeTai\Index.cshtml" />
-    <Content Include="Views\ImportExport\Index.cshtml" />
+    <Content Include="Views\QuyDoiGV\Index.cshtml" />
+    <Content Include="Views\QuyDoiGV\Edit.cshtml" />
+    <Content Include="Views\QuyDoiNCV\Index.cshtml" />
+    <Content Include="Views\QuyDoiNCV\Edit.cshtml" />
+    <Content Include="Views\QuyDoiGV\Create.cshtml" />
+    <Content Include="Views\QuyDoiNCV\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

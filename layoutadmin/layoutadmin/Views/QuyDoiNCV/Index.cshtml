@@ -1,0 +1,215 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+
+    .pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+        .pagination button {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            color: #555;
+            padding: 8px 12px;
+            margin-right: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+            .pagination button.active {
+                background-color: #007bff;
+                border-color: #007bff;
+                color: #fff;
+            }
+
+            .pagination button:hover:not(.active) {
+                background-color: #f2f2f2;
+            }
+</style>
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">QUY ĐỔI NGHIÊN CỨU VIÊN</h3>
+    </div>
+    <div class="card-body">
+        <a type="button" class="btn btn-sm btn-primary" href="~/QuyDoiNCV/Create">CREATE</a>
+        <input type="file" id="importFileInput" accept=".xlsx,.xls">
+        <button class="btn btn-sm btn-success" onclick="importExcel()">IMPORT EXCEL</button>
+        <button class="btn btn-success btn-sm" onclick="exportExcel()">EXPORT EXCEL</button>
+        <button class="btn btn-danger btn-sm" onclick="exportPdf()">EXPORT PDF</button>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        <table id="example1" class="table table-bordered table-striped">
+            <thead>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+    <!-- /.card-body -->
+    <div id="pagination" class="pagination">
+    </div>
+</div>
+<script>
+
+    fetch('https://localhost:44364/api/QuyDoiNCV/Get-all')
+        .then(response => response.json())
+        .then(data => {
+            var page_limit = 10;
+            renderTable(1, page_limit, data);
+            renderPagination(1, page_limit, data);
+            const tbody = document.querySelector('#example1 tbody');
+        })
+
+    function paginate(pageNumber, pageSize, data) {
+        var startIndex = (pageNumber - 1) * pageSize;
+        var endIndex = startIndex + pageSize;
+        var paginatedData = data.slice(startIndex, endIndex);
+        return paginatedData;
+    }
+
+    function renderTable(pageNumber, pageSize, data) {
+        var table = $("<table>");
+        table.append("<thead>< tr ><th>ID</th><th>LOẠI SẢN PHẨM</th><th>MÔ TẢ LOẠI SẢN PHẨM</th><th>YÊU CẦU TIÊU CHUẨN</th><th>TIẾT CHUẨN</th><th>ĐIỂM</th><th></th><th></th></thead > ");
+        var tbody = $("<tbody>");
+        var paginatedData = paginate(pageNumber, pageSize, data);
+
+        paginatedData.forEach(function (row) {
+
+            var tr = $("<tr>");
+            tr.append("<td>" + row.id + "</td>");
+            tr.append("<td>" + row.loaiSanPham + "</td>");
+            tr.append("<td>" + row.moTaLoaiSanPham + "</td>");
+            tr.append("<td>" + row.yeuCauTieuChuan + "</td>");
+            tr.append("<td>" + row.tietChuan + "</td>");
+            tr.append("<td>" + row.diem + "</td>");
+            tr.append('<td><button class="btn btn-sm btn-block btn-success" onclick="location.href=\'/QuyDoiNCV/Edit?id=' + row.id + '\'">EDIT</button></td>');
+            tr.append('<td><button class="btn btn-sm btn-block btn-danger" onclick="deleteItem(' + row.id + ')">DELETE</button></td>');
+            tbody.append(tr);
+        });
+        table.append(tbody);
+
+        $("#example1").empty();
+        $("#example1").append(table);
+    }
+
+    function renderPagination(pageNumber, pageSize, data) {
+        var totalPages = Math.ceil(data.length / pageSize);
+        var pagination = $("<div>");
+
+        if (totalPages <= 5) {
+
+            for (var i = 1; i <= totalPages; i++) {
+                var link = $("<button class='pagination-number'>" + i + "</button>");
+                if (i == pageNumber) {
+                    link.addClass("active");
+                }
+                pagination.append(link);
+            }
+        }
+        else {
+            var no1 = $("<button class='pagination-number'>" + 1 + "</button>");
+            if (pageNumber == 1) {
+                no1.addClass("active");
+            }
+            var no2 = $("<button class='pagination-number'>" + 2 + "</button>");
+            if (pageNumber == 2) {
+                no2.addClass("active");
+            }
+            pagination.append(no1);
+            pagination.append(no2);
+            pagination.append($('<span class="pagination-ellipsis">&hellip;</span>'));
+
+            for (var i = parseInt(pageNumber) - 1; i <= parseInt(pageNumber) + 1; i++) {
+                if (i > 2 && i < totalPages) {
+                    var link = $("<button class='pagination-number'>" + i + "</button>");
+                    if (i == pageNumber) {
+                        link.addClass("active");
+                    }
+                    pagination.append(link);
+                }
+            }
+            var noZ = $("<button class='pagination-number'>" + totalPages + "</button>");
+            if (pageNumber == totalPages) {
+                noZ.addClass("active");
+            }
+            pagination.append($('<span class="pagination-ellipsis">&hellip;</span>'));
+            pagination.append(noZ);
+        }
+        $("#pagination").empty();
+        $("#pagination").append(pagination);
+        $("#pagination button").click(function () {
+            var pageNumber = $(this).text();
+            renderTable(pageNumber, pageSize, data);
+            renderPagination(pageNumber, pageSize, data);
+        });
+    }
+    function deleteItem(id) {
+        if (confirm("Xác nhận xóa?")) {
+            fetch("https://localhost:44364/api/QuyDoiNCV/Delete/" + id, {
+                method: 'DELETE'
+            })
+                .then(response => {
+                    if (response.ok) {
+                        alert('Xóa dữ liệu thành công!');
+                        window.location.href = '/QuyDoiNCV';
+                    } else {
+                        alert('Có lỗi xảy ra');
+                    }
+                });
+        }
+    }
+    //Xuất file excel
+    function exportExcel() {
+        fetch('https://localhost:44364/api/QuyDoiNCV/Excel')
+            .then(response => response.blob())
+            .then(blob => {
+                const url = window.URL.createObjectURL(new Blob([blob]));
+                const link = document.createElement('a');
+                link.href = url;
+                link.setAttribute('download', 'data.xlsx');
+                document.body.appendChild(link);
+                link.click();
+                link.parentNode.removeChild(link);
+            })
+    }
+    //Xuất file pdf
+    function exportPdf() {
+        fetch('https://localhost:44364/api/QuyDoiNCV/Pdf')
+            .then(response => response.blob())
+            .then(blob => {
+                const url = window.URL.createObjectURL(new Blob([blob]));
+                const link = document.createElement('a');
+                link.href = url;
+                link.setAttribute('download', 'data.pdf');
+                document.body.appendChild(link);
+                link.click();
+                link.parentNode.removeChild(link);
+            })
+    }
+    //Import file excel
+    function importExcel() {
+        const input = document.querySelector('#importFileInput');
+        const file = input.files[0];
+        const formData = new FormData();
+        formData.append('file', file);
+
+        fetch('https://localhost:44364/api/QuyDoiNCV/ImportExcel', {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => {
+                if (!response.ok) {
+                    return alert("Có lỗi xảy ra");
+                }
+                return alert("Nhập dữ liệu thành công");
+            })
+    }
+</script>
