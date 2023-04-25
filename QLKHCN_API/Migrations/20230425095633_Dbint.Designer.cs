@@ -10,8 +10,8 @@ using QLKHCN_API.Data;
 namespace QLKHCN_API.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20230425033100_Dbinit")]
-    partial class Dbinit
+    [Migration("20230425095633_Dbint")]
+    partial class Dbint
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -85,15 +85,40 @@ namespace QLKHCN_API.Migrations
                     b.ToTable("DanhMuc");
                 });
 
+            modelBuilder.Entity("QLKHCN_API.Data.DanhMucScimago", b =>
+                {
+                    b.Property<int>("number")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("category_1")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("eissn")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("issn")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("journal_name")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.HasKey("number");
+
+                    b.ToTable("DanhMucScimago");
+                });
+
             modelBuilder.Entity("QLKHCN_API.Data.DanhMucXetDuyet", b =>
                 {
                     b.Property<int>("IDDanhMuc")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
 
                     b.Property<string>("category")
                         .HasMaxLength(100)
@@ -143,6 +168,10 @@ namespace QLKHCN_API.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<string>("status")
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
                     b.Property<string>("tenBaiBao")
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
@@ -177,10 +206,9 @@ namespace QLKHCN_API.Migrations
 
             modelBuilder.Entity("QLKHCN_API.Data.NguoiDung", b =>
                 {
-                    b.Property<int>("IDUser")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("IDUser")
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.Property<string>("CCCD")
                         .HasMaxLength(20)

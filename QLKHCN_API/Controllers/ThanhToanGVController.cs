@@ -60,8 +60,8 @@ namespace QLKHCN_API.Controllers
         }
 
         [HttpGet]
-        [Route("Get-lsp")]
-        public async Task<ActionResult<IEnumerable<ThanhToanGV>>> GetLsp(string lsp)
+        [Route("Get-LSP")]
+        public async Task<ActionResult<IEnumerable<ThanhToanGV>>> Get_LSP(string lsp)
         {
             try
             {

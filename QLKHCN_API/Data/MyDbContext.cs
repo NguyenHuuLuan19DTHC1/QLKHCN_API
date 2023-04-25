@@ -16,5 +16,6 @@ namespace QLKHCN_API.Data
         public DbSet<ThanhToanNCV> ThanhToanNCV { get; set; }
         public DbSet<NguoiDung> NguoiDung { get; set; }
         public DbSet<GiangVien> GiangVien { get; set; }
+        public DbSet<DanhMucScimago> DanhMucScimago { get; set; }
     }
 }

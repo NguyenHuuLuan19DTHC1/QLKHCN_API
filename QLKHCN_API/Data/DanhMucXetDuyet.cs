@@ -49,6 +49,7 @@ namespace QLKHCN_API.Data
         [MaxLength(500)]
         public string groupUser { get; set; }
 
-        public int Status { get; set; }
+        [MaxLength(10)]
+        public string status { get; set; }
     }
 }

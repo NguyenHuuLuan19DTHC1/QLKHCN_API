@@ -6,7 +6,8 @@ namespace QLKHCN_API.Data
     public class NguoiDung
     {
         [Key]
-        public int IDUser { get; set; }
+        [MaxLength(30)]
+        public string IDUser { get; set; }
 
         [MaxLength(50)]
         public string Password { get; set; }

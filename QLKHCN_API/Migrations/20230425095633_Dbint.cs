@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace QLKHCN_API.Migrations
 {
-    public partial class Dbinit : Migration
+    public partial class Dbint : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -33,6 +33,22 @@ namespace QLKHCN_API.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "DanhMucScimago",
+                columns: table => new
+                {
+                    number = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    journal_name = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
+                    issn = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
+                    eissn = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
+                    category_1 = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DanhMucScimago", x => x.number);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "DanhMucXetDuyet",
                 columns: table => new
                 {
@@ -52,7 +68,7 @@ namespace QLKHCN_API.Migrations
                     link = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
                     tenBaiBao = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
                     groupUser = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
-                    Status = table.Column<int>(type: "int", nullable: false)
+                    status = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -76,8 +92,7 @@ namespace QLKHCN_API.Migrations
                 name: "NguoiDung",
                 columns: table => new
                 {
-                    IDUser = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    IDUser = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     Password = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     HoTen = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     GioiTinh = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
@@ -169,6 +184,9 @@ namespace QLKHCN_API.Migrations
         {
             migrationBuilder.DropTable(
                 name: "DanhMuc");
+
+            migrationBuilder.DropTable(
+                name: "DanhMucScimago");
 
             migrationBuilder.DropTable(
                 name: "DanhMucXetDuyet");
