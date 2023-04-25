@@ -10,8 +10,8 @@ using QLKHCN_API.Data;
 namespace QLKHCN_API.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20230418022142_DbInit")]
-    partial class DbInit
+    [Migration("20230425033100_Dbinit")]
+    partial class Dbinit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -91,6 +91,9 @@ namespace QLKHCN_API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
                     b.Property<string>("category")
                         .HasMaxLength(100)

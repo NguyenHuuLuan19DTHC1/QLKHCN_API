@@ -20,8 +20,8 @@ namespace QLKHCN_API.Controllers
         }
 
         [HttpGet]
-        [Route("Get-all-datatem")]
-        public async Task<ActionResult<IEnumerable<DanhMucXetDuyet>>> GetAllDataTem()
+        [Route("Get-all")]
+        public async Task<ActionResult<IEnumerable<DanhMucXetDuyet>>> GetAll()
         {
             try
             {
@@ -34,8 +34,8 @@ namespace QLKHCN_API.Controllers
         }
 
         [HttpGet]
-        [Route("Get-by-userid")]
-        public async Task<ActionResult<IEnumerable<DanhMucXetDuyet>>> GetByUserId(string userid)
+        [Route("Get-userid")]
+        public async Task<ActionResult<IEnumerable<DanhMucXetDuyet>>> GetUserId(string userid)
         {
             var result = await _context.DanhMucXetDuyet.Where(a => a.userId == userid).ToListAsync();
             try
@@ -49,8 +49,8 @@ namespace QLKHCN_API.Controllers
         }
 
         [HttpGet]
-        [Route("Get-by-groupuser")]
-        public async Task<ActionResult<IEnumerable<DanhMucXetDuyet>>> GetByGroupUser(string groupuser)
+        [Route("Get-groupuser")]
+        public async Task<ActionResult<IEnumerable<DanhMucXetDuyet>>> GetGroupUser(string groupuser)
         {
             var result = await _context.DanhMucXetDuyet.Where(a => a.userId.Contains(groupuser)).ToListAsync();
             try
@@ -64,8 +64,8 @@ namespace QLKHCN_API.Controllers
         }
 
         [HttpGet]
-        [Route("Get-by-tenbaibao")]
-        public async Task<ActionResult<IEnumerable<DanhMucXetDuyet>>> GetByTenBaiBao(string tenbaibao)
+        [Route("Get-tenbaibao")]
+        public async Task<ActionResult<IEnumerable<DanhMucXetDuyet>>> GetTenBaiBao(string tenbaibao)
         {
             var result = await _context.DanhMucXetDuyet.Where(a => a.tenBaiBao.Contains(tenbaibao)).ToListAsync();
             try

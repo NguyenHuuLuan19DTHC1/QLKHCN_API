@@ -166,7 +166,7 @@ namespace QLKHCN_API.Controllers
 
         [HttpGet]
         [Route("Pdf")]
-        public async Task<IActionResult> ExportPdf2()
+        public async Task<IActionResult> ExportPdf()
         {
             var document = new PdfDocument();
             var data = await _context.QuyDoiGV.ToListAsync();

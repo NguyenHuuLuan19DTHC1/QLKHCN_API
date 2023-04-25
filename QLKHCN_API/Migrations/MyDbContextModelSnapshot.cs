@@ -90,6 +90,9 @@ namespace QLKHCN_API.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
                     b.Property<string>("category")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");

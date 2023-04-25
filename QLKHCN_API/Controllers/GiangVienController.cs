@@ -20,8 +20,27 @@ namespace QLKHCN_API.Controllers
         }
 
         [HttpGet]
+        [Route("Get-all")]
+        public async Task<ActionResult<IEnumerable<GiangVien>>> GetAll()
+        {
+            try
+            {
+                var result = await _context.GiangVien.ToListAsync();
+                if (result.Count > 0)
+                {
+                    return result;
+                }
+                return NotFound();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet]
         [Route("Get-HoTen")]
-        public async Task<ActionResult<IEnumerable<GiangVien>>> Get_HoTen(string hoten)
+        public async Task<ActionResult<IEnumerable<GiangVien>>> GetHoTen(string hoten)
         {
             try
             {
@@ -40,45 +59,37 @@ namespace QLKHCN_API.Controllers
 
         [HttpGet]
         [Route("Get-MaGV")]
-        public async Task<ActionResult<IEnumerable<GiangVien>>> Get_MaGV(string MaGV)
+        public async Task<ActionResult<GiangVien>> GetMaGV(string MaGV)
         {
-            try
+            var result = await _context.GiangVien.FindAsync(MaGV);
+
+            if (result == null)
             {
-                var result = await _context.GiangVien.Where(a => a.MaGV == MaGV).ToListAsync();
-                if (result.Count > 0)
-                {
-                    return result;
-                }
                 return NotFound();
             }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+
+            return result;
         }
 
-        [HttpGet]
-        [Route("Get-all")]
-        public async Task<ActionResult<IEnumerable<GiangVien>>> Get_all()
+        [HttpPost]
+        [Route("Create")]
+        public async Task<ActionResult<GiangVien>> Create(GiangVien gv)
         {
+            _context.GiangVien.Add(gv);
             try
             {
-                var result = await _context.GiangVien.ToListAsync();
-                if (result.Count > 0)
-                {
-                    return result;
-                }
-                return NotFound();
+                await _context.SaveChangesAsync();
             }
-            catch (Exception ex)
+            catch (DbUpdateException)
             {
-                return BadRequest(ex.Message);
+                return Conflict();
             }
+            return Ok(gv);
         }
 
         [HttpPut]
         [Route("Update/{MaGV}")]
-        public async Task<IActionResult> Check(string MaGV, GiangVien giangVien)
+        public async Task<IActionResult> Update(string MaGV, GiangVien giangVien)
         {
             if (MaGV != giangVien.MaGV)
             {
