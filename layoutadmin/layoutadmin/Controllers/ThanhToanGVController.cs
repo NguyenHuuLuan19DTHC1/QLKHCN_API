@@ -6,30 +6,21 @@ using System.Web.Mvc;
 
 namespace layoutadmin.Controllers
 {
-    public class HomeController : Controller
+    public class ThanhToanGVController : Controller
     {
+        // GET: ThanhToanGV
         public ActionResult Index()
         {
-
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult Create()
         {
-            ViewBag.Message = "Your application description page.";
-
             return View();
         }
 
-        public ActionResult Contact()
+        public ActionResult Edit(int id)
         {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
-        public ActionResult Edit()
-        {
-            
             return View();
         }
     }

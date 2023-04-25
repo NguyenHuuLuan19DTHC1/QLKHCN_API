@@ -13,7 +13,13 @@ namespace layoutadmin.Controllers
         {
             return View();
         }
-        public ActionResult Edit()
+
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        public ActionResult Edit(string MaGV)
         {
             return View();
         }

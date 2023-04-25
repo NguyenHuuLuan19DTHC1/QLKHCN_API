@@ -1,0 +1,94 @@
+﻿@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    form {
+        width: 100%;
+        margin: 0 auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 5px #999;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="number"] {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        box-sizing: border-box;
+    }
+</style>
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">THÊM DỮ LIỆU</h3>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        <form>
+            <label for="sanPhamKHCN">Sản phẩm KHCN:</label>
+            <input type="text" id="sanPhamKHCN" name="sanPhamKHCN"><br>
+
+            <label for="moTaSanPhamKHCN">Mô tả sản phẩm KHCN:</label>
+            <input type="text" id="moTaSanPhamKHCN" name="moTaSanPhamKHCN"><br>
+
+            <label for="tcnckh">TCNCKH:</label>
+            <input type="text" id="tcnckh" name="tcnckh"><br>
+
+            <label for="kinhPhi">Kinh phí:</label>
+            <input type="text" id="kinhPhi" name="kinhPhi"><br>
+
+            <button class="btn btn-block btn-success" onclick="CreateThanhToanNCV()">Lưu</button>
+        </form>
+    </div>
+    <!-- /.card-body -->
+    <div id="pagination" class="pagination">
+    </div>
+</div>
+
+<script>
+
+    function CreateThanhToanNCV() {
+
+        const apiLink = "https://localhost:44364/api/ThanhToanNCV/Create";
+        const sanPhamKHCN = document.getElementById("sanPhamKHCN").value;
+        const moTaSanPhamKHCN = document.getElementById("moTaSanPhamKHCN").value;
+        const tcnckh = document.getElementById("tcnckh").value;
+        const kinhPhi = document.getElementById("kinhPhi").value;
+
+        const data = {
+            sanPhamKHCN: sanPhamKHCN,
+            moTaSanPhamKHCN: moTaSanPhamKHCN,
+            tcnckh: tcnckh,
+            kinhPhi: kinhPhi
+        }
+
+        var options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data),
+        };
+
+        fetch(apiLink, options)
+            .then(response => {
+                if (response.ok) {
+                    alert('Thêm dữ liệu thành công!');
+                    window.location.href = '/ThanhToanNCV';
+                } else {
+                    alert('Có lỗi');
+                }
+            });
+    }
+</script>

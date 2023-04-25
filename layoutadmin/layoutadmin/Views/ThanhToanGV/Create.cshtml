@@ -1,0 +1,94 @@
+﻿@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    form {
+        width: 100%;
+        margin: 0 auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 5px #999;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="number"] {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        box-sizing: border-box;
+    }
+</style>
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">THÊM DỮ LIỆU</h3>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        <form>
+            <label for="loaiSanPham">Loại sản phẩm:</label>
+            <input type="text" id="loaiSanPham" name="loaiSanPham"><br>
+
+            <label for="moTaLoaiSanPham">Mô tả loại sản phẩm:</label>
+            <input type="text" id="moTaLoaiSanPham" name="moTaLoaiSanPham"><br>
+
+            <label for="yeuCauChatLuong">Yêu cầu chất lượng:</label>
+            <input type="text" id="yeuCauChatLuong" name="yeuCauChatLuong"><br>
+
+            <label for="kinhPhi">Kinh phí:</label>
+            <input type="number" id="kinhPhi" name="kinhPhi"><br>
+
+            <button class="btn btn-block btn-success" onclick="CreateThanhToanGV()">Lưu</button>
+        </form>
+    </div>
+    <!-- /.card-body -->
+    <div id="pagination" class="pagination">
+    </div>
+</div>
+
+<script>
+
+    function CreateThanhToanGV() {
+
+        const apiLink = "https://localhost:44364/api/ThanhToanGV/Create";
+        const loaiSanPham = document.getElementById("loaiSanPham").value;
+        const moTaLoaiSanPham = document.getElementById("moTaLoaiSanPham").value;
+        const yeuCauChatLuong = document.getElementById("yeuCauChatLuong").value;
+        const kinhPhi = document.getElementById("kinhPhi").value;
+
+        const data = {
+            loaiSanPham: loaiSanPham,
+            moTaLoaiSanPham: moTaLoaiSanPham,
+            yeuCauChatLuong: yeuCauChatLuong,
+            kinhPhi: kinhPhi
+        }
+
+        var options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data),
+        };
+
+        fetch(apiLink, options)
+            .then(response => {
+                if (response.ok) {
+                    alert('Thêm dữ liệu thành công!');
+                    window.location.href = '/ThanhToanGV';
+                } else {
+                    alert('Có lỗi');
+                }
+            });
+    }
+</script>

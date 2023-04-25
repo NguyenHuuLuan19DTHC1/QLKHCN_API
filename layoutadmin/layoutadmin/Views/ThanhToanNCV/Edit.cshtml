@@ -52,13 +52,19 @@
     <!-- /.card-header -->
     <div class="card-body">
         <form>
-            <label for="hoTen">Họ và tên:</label>
-            <input type="text" id="hoTen" name="hoTen"><br>
+            <label for="sanPhamKHCN">Sản phẩm KHCN:</label>
+            <input type="text" id="sanPhamKHCN" name="sanPhamKHCN"><br>
 
-            <label for="maDV">Mã đơn vị:</label>
-            <input type="text" id="maDV" name="maDV"><br>
+            <label for="moTaSanPhamKHCN">Mô tả sản phẩm KHCN:</label>
+            <input type="text" id="moTaSanPhamKHCN" name="moTaSanPhamKHCN"><br>
 
-            <button type="button" onclick="updateGV()">Cập nhật</button>
+            <label for="tcnckh">TCNCKH:</label>
+            <input type="text" id="tcnckh" name="tcnckh"><br>
+
+            <label for="kinhPhi">Kinh phí:</label>
+            <input type="text" id="kinhPhi" name="kinhPhi"><br>
+
+            <button type="button" onclick="updateThanhToanNCV()">Cập nhật</button>
         </form>
     </div>
     <!-- /.card-body -->
@@ -69,25 +75,31 @@
 <script>
 
     const urlParams = new URLSearchParams(window.location.search);
-    const MaGV = urlParams.get('MaGV');
+    const ID = urlParams.get('id');
 
-    fetch("https://localhost:44364/api/GiangVien/Get-MaGV?MaGV=" + MaGV)
+    fetch("https://localhost:44364/api/ThanhToanNCV/Get-id?id=" + ID)
         .then(response => response.json())
         .then(data => {
-            document.getElementById("hoTen").value = data.hoTen;
-            document.getElementById("maDV").value = data.maDV;
+            document.getElementById("sanPhamKHCN").value = data.sanPhamKHCN;
+            document.getElementById("moTaSanPhamKHCN").value = data.moTaSanPhamKHCN;
+            document.getElementById("tcnckh").value = data.tcnckh;
+            document.getElementById("kinhPhi").value = data.kinhPhi;
         })
 
-    function updateGV() {
+    function updateThanhToanNCV() {
 
-        const link = "https://localhost:44364/api/GiangVien/Update/";
-        const hoTen = document.getElementById("hoTen").value;
-        const maDV = document.getElementById("maDV").value;
+        const link = "https://localhost:44364/api/ThanhToanNCV/Update/";
+        const sanPhamKHCN = document.getElementById("sanPhamKHCN").value;
+        const moTaSanPhamKHCN = document.getElementById("moTaSanPhamKHCN").value;
+        const tcnckh = document.getElementById("tcnckh").value;
+        const kinhPhi = document.getElementById("kinhPhi").value;
 
         const data = {
-            maGV: MAGV,
-            hoTen: hoTen,
-            maDV: maDV,
+            id: ID,
+            sanPhamKHCN: sanPhamKHCN,
+            moTaSanPhamKHCN: moTaSanPhamKHCN,
+            tcnckh: tcnckh,
+            kinhPhi: kinhPhi
         }
 
         var options = {
@@ -102,7 +114,7 @@
             .then(response => {
                 if (response.ok) {
                     alert('Cập nhật dữ liệu thành công');
-                    window.location.href = '/GiangVien';
+                    window.location.href = '/ThanhToanNCV';
                 } else {
                     alert('Có lỗi xảy ra');
                 }

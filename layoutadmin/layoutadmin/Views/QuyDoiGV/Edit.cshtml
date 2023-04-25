@@ -72,17 +72,18 @@
 </div>
 
 <script>
-    const apiUrl = "https://localhost:44364/api/QuyDoiGV/Get-id?ID=";
+
     const urlParams = new URLSearchParams(window.location.search);
     const ID = urlParams.get('id');
 
-    const response = await fetch(apiUrl + ID);
-    const data = await response.json();
-
-    document.getElementById("loaiSanPham").value = data.loaiSanPham;
-    document.getElementById("moTaLoaiSanPham").value = data.moTaLoaiSanPham;
-    document.getElementById("tietChuan").value = data.tietChuan;
-    document.getElementById("diem").value = data.diem;
+    fetch("https://localhost:44364/api/QuyDoiGV/Get-id?ID=" + ID)
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById("loaiSanPham").value = data.loaiSanPham;
+            document.getElementById("moTaLoaiSanPham").value = data.moTaLoaiSanPham;
+            document.getElementById("tietChuan").value = data.tietChuan;
+            document.getElementById("diem").value = data.diem;
+        })
 
     function updateQuyDoiGV() {
 

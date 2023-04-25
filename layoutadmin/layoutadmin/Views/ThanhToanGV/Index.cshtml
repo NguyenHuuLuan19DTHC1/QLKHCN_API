@@ -34,10 +34,10 @@
 </style>
 <div class="card">
     <div class="card-header">
-        <h3 class="card-title">GIẢNG VIÊN</h3>
+        <h3 class="card-title">THANH TOÁN GIẢNG VIÊN</h3>
     </div>
     <div class="card-body">
-        <a type="button" class="btn btn-sm btn-primary" href="~/GiangVien/Create">CREATE</a>
+        <a type="button" class="btn btn-sm btn-primary" href="~/ThanhToanGV/Create">CREATE</a>
         <input type="file" id="importFileInput" accept=".xlsx,.xls">
         <button class="btn btn-sm btn-success" onclick="importExcel()">IMPORT EXCEL</button>
         <button class="btn btn-success btn-sm" onclick="exportExcel()">EXPORT EXCEL</button>
@@ -58,7 +58,7 @@
 </div>
 <script>
 
-    fetch('https://localhost:44364/api/GiangVien/Get-all')
+    fetch('https://localhost:44364/api/ThanhToanGV/Get-all')
         .then(response => response.json())
         .then(data => {
 
@@ -77,17 +77,19 @@
 
     function renderTable(pageNumber, pageSize, data) {
         var table = $("<table>");
-        table.append("<thead>< tr ><th>MÃ GIẢNG VIÊN</th><th>HỌ VÀ TÊN</th><th>MÃ ĐƠN VỊ</th><th></th><th></th></thead > ");
+        table.append("<thead>< tr ><th>ID</th><th>LOẠI SẢN PHẨM</th><th>MÔ TẢ LOẠI SẢN PHẨM</th><th>YÊU CẦU CHẤT LƯỢNG</th><th>KINH PHÍ</th><th></th><th></th></thead > ");
         var tbody = $("<tbody>");
         var paginatedData = paginate(pageNumber, pageSize, data);
 
         paginatedData.forEach(function (row) {
             var tr = $("<tr>");
-            tr.append("<td>" + row.maGV + "</td>");
-            tr.append("<td>" + row.hoTen + "</td>");
-            tr.append("<td>" + row.maDV + "</td>");
-            tr.append('<td><button class="btn btn-sm btn-block btn-success" onclick="location.href=\'/GiangVien/Edit?MaGV=' + row.maGV + '\'">EDIT</button></td>');
-            tr.append('<td><button class="btn btn-sm btn-block btn-danger" onclick="deleteItem(' + row.maGV + ')">DELETE</button></td>');
+            tr.append("<td>" + row.id + "</td>");
+            tr.append("<td>" + row.loaiSanPham + "</td>");
+            tr.append("<td>" + row.moTaLoaiSanPham + "</td>");
+            tr.append("<td>" + row.yeuCauChatLuong + "</td>");
+            tr.append("<td>" + row.kinhPhi + "</td>");
+            tr.append('<td><button class="btn btn-sm btn-block btn-success" onclick="location.href=\'/ThanhToanGV/Edit?id=' + row.id + '\'">EDIT</button></td>');
+            tr.append('<td><button class="btn btn-sm btn-block btn-danger" onclick="deleteItem(' + row.id + ')">DELETE</button></td>');
             tbody.append(tr);
         });
         table.append(tbody);
@@ -149,13 +151,13 @@
     //Xóa
     function deleteItem(id) {
         if (confirm("Xác nhận xóa?")) {
-            fetch("https://localhost:44364/api/GiangVien/Delete/" + id, {
+            fetch("https://localhost:44364/api/ThanhToanGV/Delete/" + id, {
                 method: 'DELETE'
             })
                 .then(response => {
                     if (response.ok) {
                         alert('Xóa dữ liệu thành công!');
-                        window.location.href = '/GiangVien';
+                        window.location.href = '/ThanhToanGV';
                     } else {
                         alert('Có lỗi xảy ra');
                     }
@@ -164,7 +166,7 @@
     }
     //Xuất file excel
     function exportExcel() {
-        fetch('https://localhost:44364/api/GiangVien/Excel')
+        fetch('https://localhost:44364/api/ThanhToanGV/Excel')
             .then(response => response.blob())
             .then(blob => {
                 const url = window.URL.createObjectURL(new Blob([blob]));
@@ -178,7 +180,7 @@
     }
     //Xuất file pdf
     function exportPdf() {
-        fetch('https://localhost:44364/api/GiangVien/Pdf')
+        fetch('https://localhost:44364/api/ThanhToanGV/Pdf')
             .then(response => response.blob())
             .then(blob => {
                 const url = window.URL.createObjectURL(new Blob([blob]));
@@ -197,7 +199,7 @@
         const formData = new FormData();
         formData.append('file', file);
 
-        fetch('https://localhost:44364/api/GiangVien/ImportExcel', {
+        fetch('https://localhost:44364/api/ThanhToanGV/ImportExcel', {
             method: 'POST',
             body: formData
         })
