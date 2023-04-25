@@ -1,0 +1,82 @@
+﻿@{
+    Layout = null;
+}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+
+    <title>My App</title>
+</head>
+<body class="text-center">
+    <main class="form-signin">
+        <img class="mb-4" width="250px" src="https://erp1.hutech.edu.vn/assets/png/logo.png" alt="logo">
+        <h1 class="h3 mb-3 fw-normal" style="text-align: left;"><b>></b>Vui lòng nhập mã tài khoản và mật khẩu để đăng nhập</h1>
+
+        <div class="form-floating">
+            <input type="text" name="username" class="form-control" id="username" value="PTT0130696">
+            <label for="floatingInput">Email address</label>
+        </div>
+        <div class="form-floating">
+            <input type="text" name="password" class="form-control" id="password" value="hutech@130696">
+            <label for="floatingPassword">Password</label>
+        </div>
+
+        <button onclick="handleSend()" name="submit" type="submit">@Html.ActionLink("Đăng nhập", "GV_Page") </button>
+    </main>
+    <style>
+        body {
+            height: 100%;
+        }
+
+        body {
+            padding-top: 5rem;
+            background-color: #f5f5f5;
+        }
+
+        .form-signin {
+            max-width: 25rem;
+            margin: auto;
+        }
+    </style>
+    <script>
+        function send(data) {
+            var link = "https://api.hutech.edu.vn/authentication-v2/api/auth/login-science";
+            var options = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data),
+            };
+            fetch(link, options)
+                .then(function (res) {
+                    console.log(res.json());
+
+                });
+        }
+        function handleSend() {
+            var link = "https://api.hutech.edu.vn/authentication-v2/api/auth/login-science";
+            try {
+                var username = document.querySelector('input[name="username"]').value;
+                var password = document.querySelector('input[name="password"]').value;
+                console.log(username, password);
+            } catch { }
+            if (username == undefined || password == undefined) {
+                alert("Vui long dien du thong tin");
+            } else {
+                var data = {
+                    username: username,
+                    password: password
+                }
+                send(data);
+            }
+        }
+    </script>
+</body>
+</html>

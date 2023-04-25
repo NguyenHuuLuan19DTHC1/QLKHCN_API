@@ -123,6 +123,9 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ArticleController.cs" />
+    <Compile Include="Controllers\DanhMucController.cs" />
+    <Compile Include="Controllers\DanhMucXetDuyetController.cs" />
     <Compile Include="Controllers\GiangVienController.cs" />
     <Compile Include="Controllers\QuyDoiGVController.cs" />
     <Compile Include="Controllers\QuyDoiNCVController.cs" />
@@ -2153,10 +2156,16 @@
     <Content Include="Views\GiangVien\Index.cshtml" />
     <Content Include="Views\GiangVien\Create.cshtml" />
     <Content Include="Views\GiangVien\Edit.cshtml" />
+    <Content Include="Views\Article\GV_Page.cshtml" />
+    <Content Include="Views\Article\Login.cshtml" />
+    <Content Include="Views\Article\DeTai.cshtml" />
+    <Content Include="Views\Article\ThongTin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\DanhMucXetDuyet\" />
+    <Folder Include="Views\DanhMuc\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

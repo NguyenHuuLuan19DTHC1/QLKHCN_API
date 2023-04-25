@@ -1,0 +1,346 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <header>
+        <div class="header">
+            <div class="logo">
+                @*<img src="~/Content/Images/logo_hutech.png" alt="Logo Hutech">*@
+                <img src="~/Content/Images/logo CMYK-01.png" alt="Logo Hutech" />
+            </div>
+            <div class="button">
+                <button class="btn" id="">Giảng viên</button>
+                <button class="btn" id="">Sinh viên</button>
+                <button class="btn" id="">Quản lý</button>
+            </div>
+            <div class="hello">
+                <p>Xin chào <a style="color: red; background-color: white">UserName</a></p>
+            </div>
+        </div>
+    </header>
+    <hr />
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <button class="btn btn-primary center-btn" type="button">Đề tài sinh viên</button>
+        </div>
+    </div>
+    <hr />
+    <div class="dropdown-menu-right">
+        @Html.DropDownList("year",
+                          Enumerable.Range(1990, DateTime.Now.Year - 1989)
+                          .Select(i => new SelectListItem
+                          {
+                              Text = (i - 1).ToString() + " - " + i.ToString().Substring(0),
+                              Value = i.ToString()
+                          }),
+                          "Please Select Year", new { @class = "form-control" })
+        </ul>
+    </div>
+
+    <div class="container">
+        <div class="col-4">
+            <form>
+                <div class="form-group">
+                    <input type="text" class="form-control pull-right" id="searchInput" placeholder="Search...">
+                    <button type="button" class="btn btn-primary pull-right" id="searchBtn">Search</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="col-8">
+        <div class="form-check float-right">
+            <input class="form-check-input" type="checkbox" id="check1" name="check1" value="1">
+            <label class="form-check-label" for="check1">
+                Đã nộp
+            </label>
+            <input class="form-check-input" type="checkbox" id="check2" name="check2" value="1">
+            <label class="form-check-label" for="check2">
+                Chưa nộp
+            </label>
+            <input class="form-check-input" type="checkbox" id="check3" name="check3" value="1">
+            <label class="form-check-label" for="check3">
+                Đang thực hiện
+            </label>
+            <input class="form-check-input" type="checkbox" id="check4" name="check4" value="1">
+            <label class="form-check-label" for="check4">
+                Chưa duyệt
+            </label>
+
+            <input class="form-check-input" type="checkbox" id="check5" name="check5" value="1">
+            <label class="form-check-label" for="check5">
+                Không duyệt
+            </label>
+
+            <input class="form-check-input" type="checkbox" id="check6" name="check6" value="1">
+            <label class="form-check-label" for="check6">
+                Công khai
+            </label>
+
+            <input class="form-check-input" type="checkbox" id="check7" name="check7" value="1">
+            <label class="form-check-label" for="check7">
+                Không công khai
+            </label>
+
+            <input class="form-check-input" type="checkbox" id="check8" name="check8" value="1">
+            <label class="form-check-label" for="check8">
+                Đã xác nhận
+            </label>
+
+            <input class="form-check-input" type="checkbox" id="check9" name="check9" value="1">
+            <label class="form-check-label" for="check9">
+                Chưa xác nhận
+            </label>
+
+            <input class="form-check-input" type="checkbox" id="check10" name="check10" value="1">
+            <label class="form-check-label" for="check10">
+                Đã nghiệm thu
+            </label>
+
+            <input class="form-check-input" type="checkbox" id="check11" name="check11" value="1">
+            <label class="form-check-label" for="check11">
+                Gửi nghiệm thu
+            </label>
+        </div>
+    </div>
+    <hr />
+    <div class="form-group ">
+        <div class=" pull-right">
+            <p class="text-danger mb-0"></p>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <button class="btn btn-primary" type="button">Đăng ký đề tài</button>
+            </div>
+            <div class="pull-right">
+                <button class="btn btn-outline-secondary mx-1" type="button">Xuất Word</button>
+                <button class="btn btn-outline-secondary mx-1" type="button">Xuất Excel</button>
+            </div>
+        </div>
+
+        <ul></ul>
+    </div>
+    <hr />
+
+    <table class="table table-bordered table-condensed table-hover table-striped">
+        <thead>
+            <tr>
+                <th>Loại Hình Tạp Chí</th>
+                <th>Tiêu Chuẩn</th>
+                <th>Issn</th>
+                <th>Eissn</th>
+                <th>Ngạch</th>
+                <th>Ảnh minh chứng</th>
+                <th>Link Minh chứng</th>
+                <th>Trạng Thái</th>
+            </tr>
+        </thead>
+        <tbody id="abc">
+        </tbody>
+    </table>
+</body>
+</html>
+
+<style>
+    .center-btn {
+        display: block;
+        margin: auto;
+    }
+</style>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        background-color: whitesmoke;
+    }
+
+    body {
+        font-family: "Lato", sans-serif;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 1.7;
+        color: #777;
+        padding: 70px;
+    }
+
+    .header .logo {
+        height: 100%;
+        width: 25%;
+        background-color: white;
+    }
+
+        .header .logo img {
+            width: 100%;
+            height: 100%;
+        }
+
+    .header {
+        height: 30%;
+        background-size: cover;
+        background-position: bottom;
+        position: relative;
+        width: 100%;
+        border-style: groove;
+        display: inline-flex;
+        background-color: white;
+    }
+
+    .button {
+        background-color: white;
+        width: 35%;
+        height: 100%;
+    }
+
+        .button .btn {
+            width: 25%;
+            height: 100%;
+            background-color: #008CBA;
+            color: white;
+            font-size: 90%;
+            padding: 5% 5%;
+            margin-top: 5%;
+            border-radius: 8px;
+            margin-bottom: 3%;
+            border: 1px solid #008CBA;
+        }
+
+    .hello {
+        background-color: white;
+        width: 40%;
+        height: 100%;
+    }
+
+        .hello p {
+            margin-left: 20%;
+            margin-bottom: 3%;
+            margin-top: 12%;
+            background-color: white;
+        }
+
+    .all {
+        border-style: groove;
+        margin-top: 2%;
+    }
+
+        .all p {
+            color: black;
+            font-weight: bold;
+            margin-top: 1%;
+        }
+
+        .all .option {
+            margin-top: 1%;
+            margin-left: 5%;
+        }
+
+            .all .option .checkbox {
+                margin-left: 5%;
+            }
+
+        .all .search-issn-eissn {
+            margin-top: 1%;
+            margin-left: 5%;
+        }
+
+            .all .search-issn-eissn .search {
+                width: 20%;
+                height: 10%;
+                border: 1px solid #008CBA;
+            }
+
+            .all .search-issn-eissn #inpsearch {
+                background-color: #008CBA;
+                color: white;
+                width: 7%;
+                border-radius: 5px;
+                font-size: 100%;
+                border: 1px solid white;
+            }
+
+    .result-issn-eissn {
+        margin-top: 1%;
+        margin-left: 5%;
+    }
+
+        .result-issn-eissn #lbr {
+        }
+
+        .result-issn-eissn .checkbox-result {
+            margin-left: 5%;
+        }
+
+        .result-issn-eissn .input {
+            margin-top: 1%;
+            margin-left: 5%;
+            width: 10%;
+            height: 10%;
+            font-size: 100%;
+            border: 1px solid #008CBA;
+        }
+
+    .all .upload-proof {
+        margin-top: 1%;
+        margin-left: 5%;
+    }
+</style>
+
+<script>
+    var token = "";
+    var linkapi = "https://localhost:44364/api/DataCSVTem/GetDeTaibyUserName/test2";
+    function Start() {
+        getUserName(renderGet_info);
+    }
+    Start();
+    function getUserName(callback) {
+        var searchBtn = document.querySelector('#Timbtn');
+        fetch(linkapi)
+            .then(function (response) {
+                return response.json();
+            })
+            .then(callback)
+    }
+    function renderGet_info(users) {
+        var tbody = document.querySelector('#abc');
+        var htmls = users.map(function (user) {
+            var status = '';
+            if (user.status == 0) {
+                status = 'Đang đợi duyệt';
+            } else if (user.status == 1) {
+                status = 'Duyệt lần 1';
+            } else if (user.status == 2) {
+                status = 'Duyệt lần 2';
+            } else if (user.status == 3) {
+                status = 'Từ chối';
+            }
+            return `
+                      <tr>
+                <td>${user.journal_name}</td>
+                <td>${user.category_2}</td>
+                <td>${user.issn}</td>
+                <td>${user.eissn}</td>
+                <td>${user.rank}</td>
+                <td>${user.image}</td>
+                <td>${user.link}</td>
+                <td>${status}</td>
+                    </tr>
+                    `;
+        });
+        tbody.innerHTML = htmls.join('');
+        // Hiển thị tổng số đề tài tìm thấy
+        var total = users.length;
+        var totalText = document.querySelector('.text-danger');
+        totalText.innerHTML = `Tổng số đề tài tìm thấy: ${total}`;
+    }
+</script>

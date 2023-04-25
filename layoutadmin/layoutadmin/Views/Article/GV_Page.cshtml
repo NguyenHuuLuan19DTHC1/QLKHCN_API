@@ -1,0 +1,821 @@
+﻿@{
+    Layout = null;
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="header">
+            <div class="logo">
+                <img src="~/Content/Images/logo_hutech.png" alt="Logo Hutech">
+            </div>
+            <div class="button">
+                <button class="btn" id="">Giảng viên</button>
+                <button class="btn" id="">Sinh viên</button>
+                <button class="btn" id="">Quản lý</button>
+            </div>
+            <div class="hello">
+                <p>Xin chào <a style="color: red; background-color: white">UserName</a></p>
+            </div>
+        </div>
+    </header>
+    <div class="all">
+        <p style="font-size:120%">1. Chọn ngạch công tác</p>
+        <div class="option">
+            <input type="radio" class="checkbox" id="GV" name="tick" value="0">
+            <label for="GV">Giảng viên</label>
+            <input type="radio" class="checkbox" id="NCV1" name="tick" value="1">
+            <label for="NCV1">Nghiên cứu viên 1</label>
+            <input type="radio" class="checkbox" id="NCV2" name="tick" value="2">
+            <label for="NCV2">Nghiên cứu viên 2</label>
+        </div>
+        <p style="font-size:120%">2. Nhập tên sản phẩm Khoa học công nghệ</p>
+        <div class="search-issn-eissn">
+            <label style="color: black; font-size: 120%">Nhập tên bài báo</label><br />
+            <input class="search" style="font-size: 110%;" type="text" id="input-name" name="input-name">
+        </div>
+        <div class="search-issn-eissn">
+            <label style="color: black; font-size: 120%">Tra cứu danh mục</label><br />
+            <input style="font-size: 110%;" type="text" class="search" id="search-issn" name="search-issn-eissn">
+            <input id="inpsearch" type="submit" value="Tìm kiếm" style="box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);">
+        </div>
+        <div class="result-issn-eissn" id="checkbox-result-issn-eissn">
+        </div>
+        <div class="issn-eissn-more" style="margin-left: 5%">
+            <label id="lbr" style="color: black; font-size: 120%">Danh mục khác</label>
+            <div id="div-dmk">
+            </div>
+            <style>
+                .all .issn-eissn-more .input-more {
+                    margin-top: 1%;
+                    margin-left: 5%;
+                    width: 10%;
+                    height: 10%;
+                    font-size: 100%;
+                    border: 1px solid #008CBA;
+                }
+
+                * {
+                    margin: 0;
+                    padding: 0;
+                    box-sizing: border-box;
+                    background-color: whitesmoke;
+                }
+
+                body {
+                    font-family: "Lato", sans-serif;
+                    font-size: 16px;
+                    font-weight: 400;
+                    line-height: 1.7;
+                    color: #777;
+                    padding: 70px;
+                }
+
+                .header .logo {
+                    height: 100%;
+                    width: 25%;
+                    background-color: white;
+                }
+
+                    .header .logo img {
+                        width: 100%;
+                        height: 100%;
+                    }
+
+                .header {
+                    height: 30%;
+                    background-size: cover;
+                    background-position: bottom;
+                    position: relative;
+                    width: 100%;
+                    border-style: groove;
+                    display: inline-flex;
+                    background-color: white;
+                }
+
+                .button {
+                    background-color: white;
+                    width: 35%;
+                    height: 100%;
+                }
+
+                    .button .btn {
+                        width: 25%;
+                        height: 100%;
+                        background-color: #008CBA;
+                        color: white;
+                        font-size: 90%;
+                        padding: 5% 5%;
+                        margin-top: 5%;
+                        border-radius: 8px;
+                        margin-bottom: 3%;
+                        border: 1px solid #008CBA;
+                    }
+
+                .hello {
+                    background-color: white;
+                    width: 40%;
+                    height: 100%;
+                }
+
+                    .hello p {
+                        margin-left: 20%;
+                        margin-bottom: 3%;
+                        margin-top: 12%;
+                        background-color: white;
+                    }
+
+                .all {
+                    border-style: groove;
+                    margin-top: 2%;
+                }
+
+                    .all p {
+                        color: black;
+                        font-weight: bold;
+                        margin-top: 1%;
+                    }
+
+                    .all .option {
+                        margin-top: 1%;
+                        margin-left: 5%;
+                    }
+
+                        .all .option .checkbox {
+                            margin-left: 5%;
+                        }
+
+                    .all .search-issn-eissn {
+                        margin-top: 1%;
+                        margin-left: 5%;
+                    }
+
+                        .all .search-issn-eissn .search {
+                            width: 20%;
+                            height: 10%;
+                            border: 1px solid #008CBA;
+                        }
+
+                        .all .search-issn-eissn #inpsearch {
+                            background-color: #008CBA;
+                            color: white;
+                            width: 7%;
+                            border-radius: 5px;
+                            font-size: 100%;
+                            border: 1px solid white;
+                        }
+
+                .result-issn-eissn {
+                    margin-top: 1%;
+                    margin-left: 5%;
+                }
+
+                    .result-issn-eissn #lbr {
+                    }
+
+                    .result-issn-eissn .checkbox-result {
+                        margin-left: 5%;
+                    }
+
+                    .result-issn-eissn .input {
+                        margin-top: 1%;
+                        margin-left: 5%;
+                        width: 10%;
+                        height: 10%;
+                        font-size: 100%;
+                        border: 1px solid #008CBA;
+                    }
+
+                .all .upload-proof {
+                    margin-top: 1%;
+                    margin-left: 5%;
+                }
+            </style>
+            <div class="upload-proof">
+
+                <label id="lbu" style="color: black; font-size: 120%">Tải minh chứng</label><br />
+                <label for="myFile" style="display: block; width: 10%; background: #008CBA; color: #fff; border-radius: 5px; cursor: pointer; margin-left: 5%; margin-top: 1%; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);text-align: center">Upload Image</label>
+                <input type="file" id="myFile" accept="image/*" name="filename" style="margin-left: 5%; margin-top: 1%; display: none; " onclick="image()"><br />
+                <label id="lbu" style="color: black; font-size: 120%;">Loại tác giả - cơ quan công tác</label><br />
+            </div>
+
+            <div class="upload-link" style="margin-left: 10%; margin-top: 1%">
+                <select name="tacgia" id="tacgia">
+                    <option value="0.8"> Tác giả chính</option>
+                    <option value="0.2">Tác giả phụ</option>
+                    <option value="0.5">Tác giả liên hệ</option>
+                </select><br />
+                <label for="sltg">Số lượng tác giả</label>
+                <input type="number" id="sltg" min="1" /><br />
+                <input type="text" placeholder="Nhập" id="test" oninput="inpsearch(render_user)" />
+
+                <div id="themtg" style="border-style: groove; display: flex">
+                    <div style="border-style: groove; width: 50%">
+                        <dl id="test2">
+                        </dl>
+                    </div>
+                    <div style="border-style: groove; width: 50%">
+                        <dl>
+                        </dl>
+                    </div>
+                </div>
+
+                <script>
+                    var linkuser = "https://localhost:5001/api/NguoiDung/Get-user?input=";
+                    function inpsearch(callback) {
+                        var inp = document.querySelector('#searchuser');
+                        var valueinp = document.querySelector('#test').value;
+                        fetch(linkuser + valueinp)
+                            .then(function (response) {
+                                //console.log(response.status);
+                                return response.json();
+                            })
+                            .then(callback)
+                    }
+                    function render_user(users) {
+                        var list = document.querySelector('#test2');
+
+                        var htmls = users.map(function (user) {
+                            return `<dt value="${user.idUser}"><button onclick=""> Thêm</button>${user.hoTen} - ${user.donViCongTac}</dt>
+                                                                                                                                                                                                    `
+                        });
+                        list.innerHTML = htmls.join('');
+                    }
+                    function btnadd() {
+
+                    }
+                </script>
+                <select name="coquancongtac" id="coquancongtac">
+                    <option value="1"> Cơ quan công tác duy nhất Hutech (100%)</option>
+                    <option value="0.5">Hutech-Quốc tế (50%)</option>
+                    <option value="0">Quốc tế - Hutech (0%)</option>
+                    <option value="0">Cơ quan công tác trong nước - ngoài Hutech (0%)</option>
+                </select>
+            </div>
+            <label style="margin-left: 5%; font-size: 120%; color: black; ">Chọn hình thức thanh toán</label><br />
+
+            <input style="margin-left:10%; " type="radio" class="radio-result" id="thanhtoan" name="thanhtoan-quydoi" value="" onclick="loadradio()">
+            <label for="thanhtoan">THANH TOÁN TRỰC TIẾP</label>
+            <input style="margin-left:5%; " type="radio" class="radio-result" id="quydoi" name="thanhtoan-quydoi" value="" onclick="loadradio2()">
+            <label for="quydoi">KÊ KHAI TIẾT CHUẨN</label><br />
+            <div id="yeucauchatluong"></div>
+            <div id="loaisanpham"></div>
+            <div id="tongthanhtien"></div>
+        </div>
+
+        <input id="inpsearch" type="submit" onclick="table_data()" value="Kiểm tra thông tin" style="box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); background-color: #008CBA; width: 15%; border-radius: 5px; border: 1px solid white; margin-left: 45%; border-style: groove; color: white; font-size: 150% ">
+        <div class="table-data" style="margin-left: 5%; margin-top: 1%">
+            <table id="table-data">
+                <tr>
+                    <th>Loại hình tạp chí</th>
+                    <th>Tiêu chuẩn</th>
+                    <th>Issn</th>
+                    <th>Eissn</th>
+                    <th>Ngạch</th>
+                    <th>Ảnh minh chứng</th>
+                    <th>Link minh chứng</th>
+                    <th>Thành tiền</th>
+                </tr>
+                <tr id="tr">
+                </tr>
+            </table>
+            <style>
+                table {
+                    font-family: arial, sans-serif;
+                    border-collapse: collapse;
+                    width: 100%;
+                }
+
+                td, th {
+                    border: 1px solid #dddddd;
+                    text-align: left;
+                    padding: 8px;
+                }
+
+                tr:nth-child(even) {
+                    background-color: #dddddd;
+                }
+            </style>
+        </div>
+        <input onclick="handleSend()" id="inpsearchs" type="submit" value="Xác nhận gửi" style="box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); background-color: #008CBA; border-radius: 5px; border: 1px solid white; width: 10%; margin-left: 45%; border-style: groove; color: white; font-size: 140% ">
+
+        <script>
+            function image() {
+                var image = document.querySelector("#myFile").addEventListener("change", function () {
+                    const reader = new FileReader();
+                    reader.addEventListener("load", () => {
+                        localStorage.setItem("recent-image", reader.result);
+                    });
+                    reader.readAsDataURL(this.files[0]);
+                });
+            }
+            function send(data) {
+                var link = "https://localhost:44364/api/DataCSVTem/Send";
+                var options = {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data),
+                };
+                fetch(link, options)
+                    .then(function (res) {
+                        res.json();
+                    });
+            }
+            function handleSend() {
+                var link = "https://localhost:44364/api/DataCSVTem/Send";
+                try {
+                    var name = document.querySelector("#tbname").textContent;
+                    var category = document.querySelector("#tbcate").textContent;
+                    var issn = document.querySelector("#tbissn").textContent;
+                    var eissn = document.querySelector("#tbeissn").textContent;
+                    var rank = document.querySelector("#tbrank").textContent;
+                    var image = document.querySelector("#tbimage").textContent;
+                    var link = document.querySelector("#tblink").textContent;
+                } catch { }
+                if (name == undefined || category == undefined || issn == undefined || eissn == undefined || rank == undefined || image == undefined || link == undefined) {
+                    alert("Vui long dien du thong tin");
+                } else {
+                    var data = {
+                        journal_name: name,
+                        issn: issn,
+                        eissn: eissn,
+                        category_1: category,
+                        category_2: "",
+                        category_3: "",
+                        category_4: "",
+                        category_5: "",
+                        category_6: "",
+                        citations: "",
+                        if_2022: "",
+                        jci: "",
+                        percentageOAGold: "",
+                        status: "",
+                        image: image,
+                        link: link,
+                        rank: rank,
+                    }
+                    send(data);
+                    /*try {
+
+                        var options = {
+                            method: 'POST',
+                            body: JSON.stringify(data),
+                        }
+                        fetch(link, options)
+                            .then(function (respone) {
+                                respone.json();
+                            });
+                    } catch {
+                        alert("Gui that bai");
+                    }
+                    console.log(name, category, issn, eissn, rank, image, link);*/
+
+                }
+
+            }
+            function check() {
+                var checkbox_GV = document.querySelector("#GV");
+                var checkbox_NCV1 = document.querySelector("#NCV1");
+                var checkbox_NCV2 = document.querySelector("#NCV2");
+                if (checkbox_GV.checked == true) {
+                    checkbox_NCV1.disabled = true;
+                    checkbox_NCV2.disabled = true;
+                } else if (checkbox_NCV1.checked == true) {
+                    checkbox_GV.disabled = true;
+                    checkbox_NCV2.disabled = true;
+                } else if (checkbox_NCV2.checked == true) {
+                    checkbox_GV.disabled = true;
+                    checkbox_NCV1.disabled = true;
+                } else {
+                    checkbox_GV.disabled = false;
+                    checkbox_NCV1.disabled = false;
+                    checkbox_NCV2.disabled = false;
+                }
+            }
+
+            var linkDataCSV_issn = "https://localhost:5001/api/DanhMuc/Get-issn";
+            var linkDataCSV_eissn = "https://localhost:5001/api/DataCSV/Get-eissn";
+            function Start() {
+                Get_issn(renderGet_issn);
+                /*Get_loaisanpham(render_lsp);*/
+            }
+            Start();
+            function Get_issn(callback) {
+                var searchBtn = document.querySelector('#inpsearch');
+                searchBtn.onclick = function () {
+                    var value = "https://localhost:5001/api/DanhMuc/Get-issn?issn=";
+
+                    var inputSearch = document.querySelector('input[name="search-issn-eissn"]').value;
+                    fetch(value + inputSearch)
+                        .then(function (response) {
+                            if (response.status == 404) {
+                                fetch("https://localhost:5001/api/DanhMucScimago/Get-issn?issn=" + inputSearch)
+                                    .then(function (res) {
+
+                                        return res.json();
+                                    })
+                                    .then(callback)
+                            }
+                            else {
+                                return response.json();
+
+                            }
+                        })
+                        .then(callback)
+
+                }
+            }
+            var linkapilsp = "https://localhost:5001/api/ThanhToanGV/Get-LSP?lsp="
+            var linkapispkhcn = "https://localhost:5001/api/ThanhToanNCV/Get-spkhcn?spkhcn=";
+            function Get_spkhcn(callback) {
+                var inputSearch = document.querySelector('input[id="baibaokhcn"]').value;
+                /*alert(inputSearch);*/
+
+                fetch(linkapispkhcn + inputSearch)
+                    .then(function (response) {
+                        /*console.log(response.json());*/
+                        return response.json();
+                    })
+                    .then(callback)
+            }
+            function render_spkhcn(khcns) {
+                var checkbox = document.querySelector('#loaisanpham');
+                document.querySelector('#tongthanhtien').innerHTML = ``;
+
+                var htmls = khcns.map(function (khcn) {
+                    return `<input style="margin-left:17%; " type="radio" class="radio-result" id="Q1" name="yc" value="${khcn.sanPhamKHCN}">
+                                                                                                        <label for="Q1">${khcn.moTaSanPhamKHCN} <a style="color:red">(${khcn.kinhPhi}VNĐ)</a><a style="color:green">(TCNCKH:${khcn.tcnckh})</a></label><br />
+`;
+                });
+                checkbox.innerHTML = htmls.join('');
+            }
+            function Get_spkhcn1(callback) {
+                var inputSearch = document.querySelector('input[id="sachkhcn"]').value;
+                document.querySelector('#tongthanhtien').innerHTML = ``;
+                /*alert(inputSearch);*/
+
+                fetch(linkapispkhcn + inputSearch)
+                    .then(function (response) {
+                        /*console.log(response.json());*/
+                        return response.json();
+                    })
+                    .then(callback)
+            }
+            function render_spkhcn1(khcns) {
+                var checkbox = document.querySelector('#loaisanpham');
+                document.querySelector('#tongthanhtien').innerHTML = ``;
+
+                var htmls = khcns.map(function (khcn) {
+                    return `<input style="margin-left:17%; " type="radio" class="radio-result" id="Q1" name="yc" value="${khcn.sanPhamKHCN}">
+                                                                                                        <label for="Q1">${khcn.moTaSanPhamKHCN} <a style="color:red">(${khcn.kinhPhi}VNĐ)</a><a style="color:green">(TCNCKH:${khcn.tcnckh})</a></label><br />
+`;
+                });
+                checkbox.innerHTML = htmls.join('');
+            }
+            function Get_spkhcn2(callback) {
+                var inputSearch = document.querySelector('input[id="spkkhcn"]').value;
+                /*alert(inputSearch);*/
+
+                fetch(linkapispkhcn + inputSearch)
+                    .then(function (response) {
+                        /*console.log(response.json());*/
+                        return response.json();
+                    })
+                    .then(callback)
+            }
+            function render_spkhcn2(khcns) {
+                var checkbox = document.querySelector('#loaisanpham');
+                document.querySelector('#tongthanhtien').innerHTML = ``;
+
+                var htmls = khcns.map(function (khcn) {
+                    return `<input style="margin-left:17%; " type="radio" class="radio-result" id="Q1" name="yc" value="${khcn.sanPhamKHCN}">
+                                                                                                        <label for="Q1">${khcn.moTaSanPhamKHCN} <a style="color:red">(${khcn.kinhPhi}VNĐ)</a><a style="color:green">(TCNCKH:${khcn.tcnckh})</a></label><br />
+`;
+                });
+                checkbox.innerHTML = htmls.join('');
+            }
+
+            function Get_loaisanpham(callback) {
+                var inputSearch = document.querySelector('input[id="baibao"]').value;
+                /*alert(inputSearch);*/
+
+                fetch(linkapilsp + inputSearch)
+                    .then(function (response) {
+                        /*console.log(response.json());*/
+                        return response.json();
+                    })
+                    .then(callback)
+            }
+
+            linkapiID = "https://localhost:5001/api/ThanhToanGV/Get-ID?id=";
+            function checkcheck(a, callback) {
+
+                fetch(linkapiID + a)
+                    .then(function (res) {
+                        return res.json(); Ï
+
+                    })
+                    .then(callback);
+
+            }
+            document.querySelector('#tacgia').onchange = function () {
+                document.querySelector('#yeucauchatluong').innerHTML = ``;
+                document.querySelector('#loaisanpham').innerHTML = ``;
+                document.querySelector('#tongthanhtien').innerHTML = ``;
+                document.querySelector('#thanhtoan').checked = false;
+
+            }
+            document.querySelector('#coquancongtac').onchange = function () {
+
+                document.querySelector('#yeucauchatluong').innerHTML = ``;
+                document.querySelector('#loaisanpham').innerHTML = ``;
+                document.querySelector('#tongthanhtien').innerHTML = ``;
+                document.querySelector('#thanhtoan').checked = false;
+            }
+
+            function render_check(kinhphi, lsps) {
+                var checkbox = document.querySelector('#tongthanhtien');
+                var tg = Number(document.querySelector('#tacgia').value);
+                var cq = Number(document.querySelector('#coquancongtac').value);
+                var tongkinhphi = Number(kinhphi * tg * cq);
+                checkbox.innerHTML = `<label style="color: red; margin-left: 60%; font-size: 120%"> Tổng kinh phí:${tongkinhphi} </label>`;
+            }
+            function render_lsp(lsps) {
+                var checkbox = document.querySelector('#loaisanpham');
+                document.querySelector('#tongthanhtien').innerHTML = ``;
+
+                var htmls = lsps.map(function (lsp) {
+                    return `<input style="margin-left:17%; " type="radio" class="radio-result" id="${lsp.id}" name="yc" value="${lsp.yeuCauChatLuong}" onclick="checkcheck(${lsp.id},render_check(${lsp.kinhPhi}))">
+                                                                                                        <label for="Q1">${lsp.yeuCauChatLuong} <a style="color:red">(${lsp.kinhPhi}VNĐ)</a></label><br />
+`;
+                });
+                checkbox.innerHTML = htmls.join('');
+            }
+            function Get_loaisanpham1(callback) {
+                var inputSearch = document.querySelector('input[id="spud"]').value;
+                /*alert(inputSearch);*/
+
+                fetch(linkapilsp + inputSearch)
+                    .then(function (response) {
+                        /*console.log(response.json());*/
+                        return response.json();
+                    })
+                    .then(callback)
+            }
+
+            function render_lsp1(lsps) {
+                var checkbox = document.querySelector('#loaisanpham');
+                document.querySelector('#tongthanhtien').innerHTML = ``;
+                var htmls = lsps.map(function (lsp) {
+                    return `<input style="margin-left:17%; " type="radio" class="radio-result" id="Q1" name="yc" value="${lsp.yeuCauChatLuong}" onclick="checkcheck(${lsp.id},render_check(${lsp.kinhPhi}))">
+                                                                                                        <label for="Q1">${lsp.yeuCauChatLuong} <a style="color:red">(${lsp.kinhPhi}VNĐ)</a></label><br />
+`;
+                });
+                checkbox.innerHTML = htmls.join('');
+            }
+            function Get_loaisanpham2(callback) {
+                var inputSearch = document.querySelector('input[id="shtt"]').value;
+                document.querySelector('#tongthanhtien').innerHTML = ``;
+                /*alert(inputSearch);*/
+
+                fetch(linkapilsp + inputSearch)
+                    .then(function (response) {
+                        /*console.log(response.json());*/
+                        return response.json();
+                    })
+                    .then(callback)
+            }
+            document.getElementsByName('lsp').onchange = function () {
+                document.querySelector('#loaisanpham').innerHTML = ``;
+            }
+            function loadradio() {
+                document.querySelector('#yeucauchatluong').innerHTML = ``;
+                document.querySelector('#tongthanhtien').innerHTML = ``;
+                document.querySelector('#loaisanpham').innerHTML = ``;
+
+                document.querySelector('#yeucauchatluong').innerHTML = `<input style="margin-left:15%; " type="radio" class="radio - result" id="baibao" name="lsp" value="BaiBao" onclick="Get_loaisanpham(render_lsp)">
+                                                                                        <label for="baibao"> BÀI BÁO</label>
+                                                                                            <input style="margin-left:5%; " type="radio" class="radio-result" id="spud" name="lsp" value="SPUD" onclick="Get_loaisanpham1(render_lsp1)">
+                                                                                                <label for="spud">SẢN PHẨM ỨNG DỤNG</label>
+                                                                                                <input style="margin-left:5%; " type="radio" class="radio-result" id="shtt" name="lsp" value="SHTT" onclick="Get_loaisanpham2(render_lsp2)">
+                                                                                                    <label for="shtt">SỞ HỮU TRÍ TUỆ</label><br />`;
+
+            }
+            function loadradio2() {
+                document.querySelector('#yeucauchatluong').innerHTML = ``;
+                document.querySelector('#loaisanpham').innerHTML = ``;
+                document.querySelector('#tongthanhtien').innerHTML = ``;
+                document.querySelector('#yeucauchatluong').innerHTML = `<input style="margin-left:15%; " type="radio" class="radio - result" id="baibaokhcn" name="lsp" value="BaiBao" onclick="Get_spkhcn(render_spkhcn)">
+                                                                <label for="baibao"> BÀI BÁO</label>
+                                                                <input style="margin-left:5%; " type="radio" class="radio-result" id="sachkhcn" name="lsp" value="Sach" onclick="Get_spkhcn1(render_spkhcn1)">
+                                                                <label for="spud">SÁCH/CHƯƠNG SÁCH</label>
+                                                                <input style="margin-left:5%; " type="radio" class="radio-result" id="spkkhcn" name="lsp" value="SPK" onclick="Get_spkhcn2(render_spkhcn2)">
+                                                                <label for="shtt">SẢN PHẨM KHÁC</label><br />`;
+
+            }
+            function render_lsp2(lsps) {
+                var checkbox = document.querySelector('#loaisanpham');
+                var htmls = lsps.map(function (lsp) {
+                    return `<input style="margin-left:17%; " type="radio" class="radio-result" id="Q1" name="yc" value="${lsp.yeuCauChatLuong}" onclick="checkcheck(${lsp.id},render_check(${lsp.kinhPhi}))">
+                                                                                                        <label for="Q1">${lsp.yeuCauChatLuong} <a style="color:red">(${lsp.kinhPhi}VNĐ)</a></label><br />
+`;
+                });
+                checkbox.innerHTML = htmls.join('');
+            }
+            function table_data() {
+                var checkbox_GV = document.querySelector("#GV");
+                var checkbox_NCV1 = document.querySelector("#NCV1");
+                var checkbox_NCV2 = document.querySelector("#NCV2");
+                var radio_1 = document.querySelector("#category-1");
+                var radio_2 = document.querySelector("#category-2");
+                var radio_3 = document.querySelector("#category-3");
+                var radio_4 = document.querySelector("#category-4");
+                var radio_5 = document.querySelector("#category-5");
+                var radio_6 = document.querySelector("#category-6");
+                try {
+                    var name = document.querySelector("#lbname").textContent;
+                    var issn = document.querySelector("#lbissn").textContent;
+                    var eissn = document.querySelector("#lbeissn").textContent;
+                } catch { }
+                var link = document.querySelector('input[name="lblink"]').value;
+                var category = "";
+                var rank = null;
+                try {
+                    if (checkbox_GV.checked == true) {
+                        rank = "Giảng viên";
+                    }
+                    if (checkbox_NCV1.checked == true) {
+                        rank = "Nghiên cứu viên 1";
+                    }
+                    if (checkbox_NCV2.checked == true) {
+                        rank = "Nghiên cứu viên 2";
+                    }
+                    if (radio_1.checked == true) {
+                        category = radio_1.value;
+                    }
+                    if (radio_2.checked == true) {
+                        category = radio_2.value;
+                    }
+                    if (radio_3.checked == true) {
+                        category = radio_3.value;
+                    }
+                    if (radio_4.checked == true) {
+                        category = radio_4.value;
+                    }
+                    if (radio_5.checked == true) {
+                        category = radio_5.value;
+                    }
+                    if (radio_6.checked == true) {
+                    }
+                } catch {
+
+                }
+                document.querySelector('#tr').innerHTML = `<tr><td id="tbname">${name}</td><td id="tbcate">${category}</td><td id="tbissn">${issn}</td><td id="tbeissn">${eissn}</td><td id="tbrank">${rank}</td><td id="tbimage">${link}</td><td id="tblink">${link}</td ></tr >`;
+
+            }
+
+            function renderGet_issn(issns) {
+                console.log(issns);
+                if (issns == null) {
+                    document.querySelector('#div-dmk').innerHTML = `<input class="input-more" style="width: 25%; font-size: 120%" id="inp-name" placeholder="Name">
+                                                            <input class="input-more" style=" font-size: 120%" id="inp-issn" placeholder="Issn">
+                                                            <input class="input-more" style=" font-size: 120%" id="inp-iessn" placeholder="Eissn">
+                                                            <input class="input-more" style="width: 25%; font-size: 120%" id="inp-catigory" placeholder="Category">`;
+                } else {
+                    document.querySelector('#div-dmk').innerHTML = ``;
+                    var checkbox = document.querySelector('#checkbox-result-issn-eissn');
+                    check.innerHTML = ``;
+                    var htmls = issns.map(function (issn) {
+                        if (issn.category_6 == null) {
+                            if (issn.category_5 == null) {
+                                if (issn.category_4 == null) {
+                                    if (issn.category_3 == null) {
+                                        if (issn.category_2 == null) {
+                                            return `<label id="lbr" style="color: black; font-size: 120%">Các danh mục liên quan</label><br />
+                                                                                                                                                                                                        <label  style="margin-left: 3%;font-size: 120%">Tên danh mục: <label id="lbname" style="color: red;">${issn.journal_name}</label></label>
+                                                                                                                                                                                                        <label style="font-size: 120%;  margin-left: 5%;">Issn: <label id="lbissn" style="color: red; ">${issn.issn}</label></label>
+                                                                                                                                                                                                        <label style="font-size: 120%;  margin-left: 5%;">Eissn: <label  id="lbeissn" style="color: red;">${issn.eissn}</label></label><br />
+                                                                                                                                                                                                        <input type="radio" class="radio-result" id="category-1" name="category" value="${issn.category_1}">
+                                                                                                                                                                                                        <label for="category-1">${issn.category_1}</label>
+                                                                                                                                                                                                        <style>
+                                                                                                                                                                                    .radio-result{
+                                                                                                                                                                                        margin-left: 5%;
+                                                                                                                                                                                    }
+                                                                                                                                                                                </style>
+                                                                                                                                                                                                        `;
+                                        }
+                                        return `<label id="lbr" style="color: black; font-size: 120%">Các danh mục liên quan</label><br />
+                                                                                                                                                                                                        <label  style="margin-left: 3%;font-size: 120%">Tên danh mục: <label id="lbname" style="color: red;">${issn.journal_name}</label></label>
+                                                                                                                                                                                                        <label style="font-size: 120%;  margin-left: 5%;">Issn: <label id="lbissn" style="color: red; ">${issn.issn}</label></label>
+                                                                                                                                                                                                        <label style="font-size: 120%;  margin-left: 5%;">Eissn: <label  id="lbeissn" style="color: red;">${issn.eissn}</label></label><br />
+                                                                                                                                                                                                        <input type="radio" class="radio-result" id="category-1" name="category" value="${issn.category_1}">
+                                                                                                                                                                                                        <label for="category-1">${issn.category_1}</label><br>
+                                                                                                                                                                                                        <input type="radio" class="radio-result" id="category-2" name="category" value="${issn.category_2}">
+                                                                                                                                                                                                        <label for="category-2">${issn.category_2}</label>
+                                                                                                                                                                                                        <style>
+                                                                                                                                                                                    .radio-result{
+                                                                                                                                                                                        margin-left: 5%;
+                                                                                                                                                                                    }
+                                                                                                                                                                                </style>
+                                                                                                                                                                                                        `;
+                                    }
+                                    return `<label id="lbr" style="color: black; font-size: 120%">Các danh mục liên quan</label><br />
+                                                                                                                                                                                                        <label  style="margin-left: 3%;font-size: 120%">Tên danh mục: <label id="lbname" style="color: red;">${issn.journal_name}</label></label>
+                                                                                                                                                                                                        <label style="font-size: 120%;  margin-left: 5%;">Issn: <label id="lbissn" style="color: red; ">${issn.issn}</label></label>
+                                                                                                                                                                                                        <label style="font-size: 120%;  margin-left: 5%;">Eissn: <label  id="lbeissn" style="color: red;">${issn.eissn}</label></label><br />
+                                                                                                                                                                                                        <input type="radio" class="radio-result" id="category-1" name="category" value="${issn.category_1}">
+                                                                                                                                                                                                        <label for="category-1">${issn.category_1}</label><br />
+                                                                                                                                                                                                        <input type="radio" class="radio-result" id="category-2" name="category" value="${issn.category_2}">
+                                                                                                                                                                                                        <label for="category-2">${issn.category_2}</label><br />
+                                                                                                                                                                                                        <input type="radio" class="radio-result" id="category-3" name="category" value="${issn.category_3}">
+                                                                                                                                                                                                        <label for="category-3">${issn.category_3}</label><br />
+                                                                                                                                                                                                        <style>
+                                                                                                                                                                                    .radio-result{
+                                                                                                                                                                                        margin-left: 5%;
+                                                                                                                                                                                    }
+                                                                                                                                                                                </style>
+                                                                                                                                                                                                        `;
+                                }
+                                return `<label id="lbr" style="color: black; font-size: 120%">Các danh mục liên quan</label><br />
+                                                                                                                                                                                                        <label  style="margin-left: 3%;font-size: 120%">Tên danh mục: <label id="lbname" style="color: red;">${issn.journal_name}</label></label>
+                                                                                                                                                                                                        <label style="font-size: 120%;  margin-left: 5%;">Issn: <label id="lbissn" style="color: red; ">${issn.issn}</label></label>
+                                                                                                                                                                                                        <label style="font-size: 120%;  margin-left: 5%;">Eissn: <label  id="lbeissn" style="color: red;">${issn.eissn}</label></label><br />
+                                                                                                                                                                                                        <input type="radio" class="radio-result" id="category-1" name="category" value="${issn.category_1}">
+                                                                                                                                                                                                        <label for="category-1">${issn.category_1}</label><br />
+                                                                                                                                                                                                        <input type="radio" class="radio-result" id="category-2" name="category" value="${issn.category_2}">
+                                                                                                                                                                                                        <label for="category-2">${issn.category_2}</label><br />
+                                                                                                                                                                                                        <input type="radio" class="radio-result" id="category-3" name="category" value="${issn.category_3}">
+                                                                                                                                                                                                        <label for="category-3">${issn.category_3}</label><br />
+                                                                                                                                                                                                        <input type="radio" class="radio-result" id="category-4" name="category" value="${issn.category_4}">
+                                                                                                                                                                                                        <label for="category-4">${issn.category_4}</label>
+                                                                                                                                                                                                        <style>
+                                                                                                                                                                                    .radio-result{
+                                                                                                                                                                                        margin-left: 5%;
+                                                                                                                                                                                    }
+                                                                                                                                                                                </style>
+                                                                                                                                                                                                        `;
+                            }
+                            return `<label id="lbr" style="color: black; font-size: 120%">Các danh mục liên quan</label><br />
+                                                                                                                                                                                                        <label  style="margin-left: 3%;font-size: 120%">Tên danh mục: <label id="lbname" style="color: red;">${issn.journal_name}</label></label>
+                                                                                                                                                                                                        <label style="font-size: 120%;  margin-left: 5%;">Issn: <label id="lbissn" style="color: red; ">${issn.issn}</label></label>
+                                                                                                                                                                                                        <label style="font-size: 120%;  margin-left: 5%;">Eissn: <label  id="lbeissn" style="color: red;">${issn.eissn}</label></label><br />
+                                                                                                                                                                                                        <input type="radio" class="radio-result" id="category-1" name="category" value="${issn.category_1}">
+                                                                                                                                                                                                        <label for="category-1">${issn.category_1}</label><br />
+                                                                                                                                                                                                        <input type="radio" class="radio-result" id="category-2" name="category" value="${issn.category_2}">
+                                                                                                                                                                                                        <label for="category-2">${issn.category_2}</label><br />
+                                                                                                                                                                                                        <input type="radio" class="radio-result" id="category-3" name="category" value="${issn.category_3}">
+                                                                                                                                                                                                        <label for="category-3">${issn.category_3}</label><br />
+                                                                                                                                                                                                        <input type="radio" class="radio-result" id="category-4" name="category" value="${issn.category_4}">
+                                                                                                                                                                                                        <label for="category-4">${issn.category_4}</label>
+                                                                                                                                                                                                        <input type="radio" class="radio-result" id="category-5" name="category" value="${issn.category_5}">
+                                                                                                                                                                                                        <label for="category-5">${issn.category_5}</label>
+                                                                                                                                                                                                        <style>
+                                                                                                                                                                                    .radio-result{
+                                                                                                                                                                                        margin-left: 5%;
+                                                                                                                                                                                    }
+                                                                                                                                                                                </style>
+                                                                                                                                                                                                        `;
+                        } else {
+                            return `<label id="lbr" style="color: black; font-size: 120%">Các danh mục liên quan</label><br />
+                                                                                                                                                                                                        <label  style="margin-left: 3%;font-size: 120%">Tên danh mục: <label id="lbname" style="color: red;">${issn.journal_name}</label></label>
+                                                                                                                                                                                                        <label style="font-size: 120%;  margin-left: 5%;">Issn: <label id="lbissn" style="color: red; ">${issn.issn}</label></label>
+                                                                                                                                                                                                        <label style="font-size: 120%;  margin-left: 5%;">Eissn: <label  id="lbeissn" style="color: red;">${issn.eissn}</label></label><br />
+                                                                                                                                                                                                        <input type="radio" class="radio-result" id="category-1" name="category" value="${issn.category_1}">
+                                                                                                                                                                                                        <label for="category-1">${issn.category_1}</label><br />
+                                                                                                                                                                                                        <input type="radio" class="radio-result" id="category-2" name="category" value="${issn.category_2}">
+                                                                                                                                                                                                        <label for="category-2">${issn.category_2}</label><br />
+                                                                                                                                                                                                        <input type="radio" class="radio-result" id="category-3" name="category" value="${issn.category_3}">
+                                                                                                                                                                                                        <label for="category-3">${issn.category_3}</label><br />
+                                                                                                                                                                                                        <input type="radio" class="radio-result" id="category-4" name="category" value="${issn.category_4}" ">
+                                                                                                                                                                                                        <label for="category-4">${issn.category_4}</label><br />
+                                                                                                                                                                                                        <input type="radio" class="radio-result" id="category-5" name="category" value="${issn.category_5}">
+                                                                                                                                                                                                        <label for="category-5">${issn.category_5}</label><br />
+                                                                                                                                                                                                        <input type="radio" class="radio-result" id="category-6" name="category" value="${issn.category_6}">
+                                                                                                                                                                                                        <label for="category-5">${issn.category_6}</label><br />
+                                                                                                                                                                                                        <style>
+                                                                                                                                                                                    .radio-result{
+                                                                                                                                                                                        margin-left: 5%;
+                                                                                                                                                                                    }
+                                                                                                                                                                                </style>`;
+                        }
+                    });
+                }
+                checkbox.innerHTML = htmls.join('');
+
+            }</script>
+    </div>
+</body>
+</html>

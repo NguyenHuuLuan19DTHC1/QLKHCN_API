@@ -1,0 +1,220 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        #wrapper {
+            width: 100%;
+            margin: 0% auto;
+        }
+
+        #header {
+            background: rgb(177, 214, 238);
+            padding: 0%;
+            margin: 0%;
+        }
+
+        table,
+        th,
+        td {
+            border: 50% solid black;
+            padding: 1%;
+            padding-top: 1%;
+            padding-bottom: 1%;
+            text-align: left;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            font-family: Arial, Helvetica, sans-serif;
+            /* margin-bottom: 10px; */
+        }
+
+        th {
+            text-align: right;
+        }
+
+        #header {
+            text-align: left;
+            border: 1px solid black;
+        }
+
+        #userinfor td:hover {
+            background-color: #ddd;
+        }
+
+        #address td:hover {
+            background-color: #ddd;
+        }
+
+        #useremail td:hover {
+            background-color: #ddd;
+        }
+
+        #contact td:hover {
+            background-color: #ddd;
+        }
+
+        #userinfor th {
+            background-color: #ddd;
+        }
+
+        #address th {
+            background-color: #ddd;
+        }
+
+        #useremail th {
+            background-color: #ddd;
+        }
+
+        #contact th {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <!-- <label for="username">Username</label>
+        <input id="username" name="username" type="text" placeholder="Username">
+        <input id="Sub" type="submit" value="Get" onclick="getInfo();"> -->
+    </header>
+    <div id="wrapper">
+        <div id="infor">
+            <div id="header">
+                <h3>
+                    Thông tin cá nhân
+                </h3>
+            </div>
+            <div id="content">
+                <table id="userinfor">
+                    <tr id="name">
+                        <th>Họ tên</th>
+                    </tr>
+                    <tr id="sex">
+                        <th>Giới tính</th>
+                    </tr>
+                    <tr dir="birth">
+                        <th>Ngày sinh</th>
+                    </tr>
+                    <tr id="identity">
+                        <th>Số chứng minh</th>
+                    </tr>
+                    <tr id="degree">
+                        <th>Chức danh khoa học/học vị</th>
+                        <td>
+                            <label id="checkbox"><input type="radio">GS</label>
+                            <label id="checkbox"><input type="radio">PGS</label>
+                            <label id="checkbox"><input type="radio">TS</label>
+                            <label id="checkbox"><input type="radio">ThS</label>
+                            <label id="checkbox"><input type="radio">KS</label>
+                            <label id="checkbox"><input type="radio">CN</label>
+                            <label id="checkbox"><input type="radio">BS</label>
+                        </td>
+                    </tr>
+                    <tr id="job">
+                        <th>Chức vụ hành chính</th>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div id="speci">
+            <div id="header">
+                <h3>
+                    Chuyên nghành khoa học
+                </h3>
+            </div>
+            <div id="content">
+                <table id="major">
+                    <thead>
+                        <tr id="col">
+                            <th style="text-align:left">Thứ tự</th>
+                            <th style="text-align:left">Mã quản lý</th>
+                            <th style="text-align:right">Tên chuyên nghành</th>
+                        </tr>
+                    </thead>
+                    <tr>
+                    </tr>
+                    <tr>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div id="bussiness">
+            <div id="header">
+                <h3>
+                    Nơi công tác hiện tại
+                </h3>
+            </div>
+            <div id="content">
+                <table id="address">
+                    <tr id="school">
+                        <th>Đơn vị công tác</th>
+                        <td></td>
+                    </tr>
+                    <tr id="room">
+                        <th>Phòng ban, bộ môn</th>
+                        <td></td>
+                    </tr>
+                    <tr id="place">
+                        <th>Địa chỉ</th>
+                        <td></td>
+                    </tr>
+                    <tr id="city">
+                        <th>Tỉnh/Thành phố</th>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div id="email">
+            <div id="header">
+                <h3>
+                    Địa chỉ Email
+                </h3>
+            </div>
+            <div id="content">
+                <table id="useremail">
+                    <tr id="mainmail">
+                        <th>Email chính</th>
+                        <td></td>
+                    </tr>
+                    <tr id="secondmail">
+                        <th>Email thay thế</th>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div id="phone">
+            <div id="header">
+                <h3>
+                    Số điện thoại
+                </h3>
+            </div>
+            <div id="content">
+                <table id="contact">
+                    <tr id="phonecomp">
+                        <th>Số ĐT cơ quan</th>
+                        <td></td>
+                    </tr>
+                    <tr id="selfphone">
+                        <th>Số ĐT cá nhân</th>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script>
+    </script>
+</body>
+</html>
