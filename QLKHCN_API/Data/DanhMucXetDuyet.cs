@@ -47,9 +47,18 @@ namespace QLKHCN_API.Data
         public string tenBaiBao { get; set; }
 
         [MaxLength(500)]
+        public string type { get; set; }
+
+        [MaxLength(500)]
         public string groupUser { get; set; }
 
         [MaxLength(10)]
         public string status { get; set; }
+
+        [MaxLength(10)]
+        public string quantity { get; set; }
+
+        [MaxLength(10)]
+        public string total { get; set; }
     }
 }

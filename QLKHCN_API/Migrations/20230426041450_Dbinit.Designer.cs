@@ -10,8 +10,8 @@ using QLKHCN_API.Data;
 namespace QLKHCN_API.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20230425095633_Dbint")]
-    partial class Dbint
+    [Migration("20230426041450_Dbinit")]
+    partial class Dbinit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -164,6 +164,10 @@ namespace QLKHCN_API.Migrations
                         .HasMaxLength(15)
                         .HasColumnType("nvarchar(15)");
 
+                    b.Property<string>("quantity")
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
                     b.Property<string>("rank")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
@@ -173,6 +177,14 @@ namespace QLKHCN_API.Migrations
                         .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("tenBaiBao")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("total")
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<string>("type")
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 

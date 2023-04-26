@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace QLKHCN_API.Migrations
 {
-    public partial class Dbint : Migration
+    public partial class Dbinit : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -67,8 +67,11 @@ namespace QLKHCN_API.Migrations
                     image = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     link = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
                     tenBaiBao = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
+                    type = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
                     groupUser = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
-                    status = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true)
+                    status = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
+                    quantity = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
+                    total = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true)
                 },
                 constraints: table =>
                 {

@@ -56,5 +56,38 @@ namespace QLKHCN_API.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpGet]
+        [Route("Get-all")]
+        public async Task<ActionResult<IEnumerable<DanhMuc>>> GetAll()
+        {
+            try
+            {
+                return Ok(await _context.DanhMuc.ToListAsync());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("search")]
+        public async Task<ActionResult<IEnumerable<DanhMuc>>> Search(string key)
+        {
+            try
+            {
+                var result = await _context.DanhMuc.Where(a => a.issn == key || a.eissn == key || a.journal_name.Contains(key)).ToListAsync();
+                if (result.Count > 0)
+                {
+                    return result;
+                }
+                return NotFound();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }
