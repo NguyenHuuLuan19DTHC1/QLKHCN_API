@@ -35,7 +35,7 @@ namespace QLKHCN_API.Controllers
 
         [HttpGet]
         [Route("Get-by-id")]
-        public async Task<ActionResult<IEnumerable<DanhMucXetDuyet>>> GetByUserId(int id)
+        public async Task<ActionResult<IEnumerable<DanhMucXetDuyet>>> GetById(int id)
         {
             var result = await _context.DanhMucXetDuyet.Where(a => a.IDDanhMuc == id).ToListAsync();
             try
@@ -145,6 +145,31 @@ namespace QLKHCN_API.Controllers
             {
                 return Conflict();
             }
+        }
+
+        [HttpPut]
+        [Route("Update-status")]
+        public async Task<IActionResult> UpdateStatus(int IDDanhMuc, string status)
+        {
+            var dmxd = await _context.DanhMucXetDuyet.FindAsync(IDDanhMuc);
+
+            if (dmxd == null)
+            {
+                return NotFound();
+            }
+
+            dmxd.status = status;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                return NotFound();
+            }
+
+            return Ok(dmxd);
         }
     }
 }
